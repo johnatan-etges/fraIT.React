@@ -1,0 +1,69 @@
+import styled from 'styled-components';
+
+export const Container = styled.div`
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  min-height: 150px;
+  max-height: 250px;
+  
+  padding: 1vh 1vw;
+
+  position: relative;
+
+  border: 1px solid ${({theme}) => theme.primary};
+  border-radius: 5px;
+
+  margin: .8vh .5vw 0 .5vw; 
+
+  &:hover {
+    border: 1px solid ${({theme}) => theme.special};
+    filter: drop-shadow(1px 2px 1px ${({theme}) => theme.shadow});
+  }
+
+  .cardHeader {
+    min-height: 50px;
+    padding: 1vh 2vw;
+    margin-bottom: 15px;
+
+    border-bottom: 1px solid ${({theme}) => theme.contrast};
+  }
+
+  .titulo {
+    color: ${({theme}) => theme.special};
+    font-size: 2.2vh;
+  }
+
+  .subtitulo {
+    font-size: 1.8vh;
+    color: ${({theme}) => theme.contrast};
+  }
+
+  .paragrafo {
+    font-size: 2vh;
+  }
+
+  @media (max-width: ${({theme}) => theme.tablet}) {
+
+    h3 {
+      font-size: 3vh;
+    }
+
+    p {
+      font-size: 2vh;
+    }
+  }
+
+  @media (max-width: ${({theme}) => theme.mobile}) {
+
+    h3 {
+      font-size: 3.5vh;
+    }
+
+    p {
+      font-size: 2.4vh;
+    }
+  } 
+`;

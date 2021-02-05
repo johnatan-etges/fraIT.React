@@ -1,0 +1,107 @@
+import React, { useState } from 'react';
+
+import { Container } from './styles';
+import NavBar from '../navBar';
+import NavOptions from '../navOptions';
+import Sidebar from '../../components/sidebar';
+import Burger from '../../components/burger';
+
+
+function Header({title}) {  
+
+  const [open, setOpen] = useState(false);  
+  const sideBarId = "main-menu";
+  const menuItems = [
+    {
+      target: '#',
+      open: open,
+      icon: '💻',
+      linkName: 'Help Desk',
+      menuItem: [
+        {
+          target: '/dashboard',
+          open: open,
+          icon: '💻',
+          linkName: 'Tickets TI',
+        },
+        {
+          target: '#',
+          open: open,
+          icon: '🔧',
+          linkName: 'Assist. externa',
+        },
+      ]
+    },      
+    {
+      target: '#',
+      open: open,
+      icon: '📱',
+      linkName: 'Telefonia',
+      menuItem: [
+        {
+          target: '#',
+          open: open,
+          icon: '📱',
+          linkName: 'Celulares',
+        },
+        {
+          target: '#',
+          open: open,
+          icon: '📱',
+          linkName: 'Fixos',
+        }
+      ]
+    },
+    {
+      target: '#',
+      open: open,
+      icon: '🗄️',
+      linkName: 'Cadastros',
+      menuItem: [
+        {
+          target: '/cadastros/usuario',
+          open: open,
+          icon: '👥',
+          linkName: 'Usuários',
+        },
+        {
+          target: '/cadastros/secretarias-locais',
+          open: open,
+          icon: '🏛️',
+          linkName: 'Secretarias e locais',
+        }
+      ]
+    },
+    {
+      target: '#',
+      open: open,
+      icon: '📃',
+      linkName: 'Relatórios',
+      menuItem: [
+        {
+          target: '#',
+          open: open,
+          icon: '📃',
+          linkName: 'Top users',
+        },
+      ]
+    },
+    {
+      target: '/dashboard',
+      open: open,
+      icon: '⚙️',
+      linkName: 'Configurações',
+    },
+  ];
+  
+  return (   
+      <Container>
+        <Burger open={open} setOpen={setOpen} aria-controls={sideBarId}/>
+        <Sidebar open={open} setOpen={setOpen} id={sideBarId} menuItems={menuItems}/>
+        <h1 className="title">{title}</h1>
+        <NavOptions />
+      </Container>
+  );
+};
+
+export default Header;
