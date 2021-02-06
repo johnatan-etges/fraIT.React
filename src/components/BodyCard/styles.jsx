@@ -7,18 +7,15 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  margin: 85px auto -7vw;
+  margin: 85px auto -6.5vw;
 
   box-sizing: border-box;
   overflow: hidden;
 
   padding: 1vh 1vw;
 
-  border-top: 1px solid ${({theme}) => theme.secundary};
-  border-left: 1px solid ${({theme}) => theme.secundary};
-
   background-color: ${({theme}) => theme.primary};
-  filter: drop-shadow(2px 0 2px ${({theme}) => theme.shadow});
+  filter: drop-shadow(0 0 2px ${({theme}) => theme.shadow});
 
   @media (max-width: ${({theme}) => theme.tablet}) {
     width: 89vw;

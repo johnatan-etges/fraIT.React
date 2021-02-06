@@ -16,7 +16,7 @@ export const StyledA = styled.a`
         text-align: center;
     }
     &:hover {
-        color: ${({accordionOpen, theme }) => accordionOpen ? theme.secundary : theme.special};
+        color: ${({accordionOpen, theme }) => accordionOpen ? theme.contrast : theme.special};
     }
 
     .accordion_icon {

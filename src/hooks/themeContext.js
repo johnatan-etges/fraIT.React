@@ -10,7 +10,6 @@ export const MyThemeProvider = ({ children }) => {
 
   const [themeState, setThemeState] = useState({
     mode: localStorage.getItem('@fraIT/mode') || 'light',
-    viewMode: localStorage.getItem('fraIT/viewMode') || 'grid',
   });
 
   const Wrapper = styled.div`
@@ -22,9 +21,7 @@ export const MyThemeProvider = ({ children }) => {
 
   const toggle = () => {
     const mode = (themeState.mode === 'light' ? 'dark' : 'light');
-    localStorage.setItem('@fraIT/mode', mode);
-    const viewMode = (themeState.viewMode === 'grid' ? 'card' : 'grid');
-    localStorage.setItem('@fraIT/viewMode', viewMode);
+    localStorage.setItem('@fraIT/mode', mode);    
     setThemeState({mode: mode});
   };
 

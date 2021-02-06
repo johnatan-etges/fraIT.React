@@ -1,11 +1,14 @@
 import React from 'react';
 
-import { Container } from './styles';
-function ViewSwitcher() {  
+import { StyledButton } from './styles';
+import { useView } from '../../hooks/viewContext';
+
+function ViewSwitcher() {
+
+  const viewToggle = useView();
 
   return (
-    <Container>
-
+    <StyledButton onClick={() => viewToggle.toggle()}>
       {localStorage.getItem('@fraIT\viewMode') === 'card' ? (
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 0H30V30H0V0Z" fill="white"/>
@@ -38,7 +41,7 @@ function ViewSwitcher() {
         />
       </svg>
       )}
-    </Container>
+    </StyledButton>
 
   );
 }
