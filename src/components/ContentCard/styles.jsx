@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'styled-theming';
 
 export const Container = styled.div`
 
@@ -19,13 +20,12 @@ export const Container = styled.div`
   margin: .8vh .5vw 0 .5vw; 
 
   &:hover {
-    border: 1px solid ${({theme}) => theme.special};
-    filter: drop-shadow(1px 2px 1px ${({theme}) => theme.shadow});
+    border: 1px solid ${({theme}) => theme.contrast};
   }
 
   .cardHeader {
     min-height: 50px;
-    padding: 1vh 2vw;
+    padding: 1vh 0;
     margin-bottom: 15px;
 
     border-bottom: 1px solid ${({theme}) => theme.contrast};

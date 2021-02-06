@@ -12,8 +12,8 @@ import Footer from '../../../components/footer';
 import ContentCard from '../../../components/ContentCard';
 import OptionBox from '../../../components/optionsBox';
 import OptionsBoxItem from '../../../components/optionsBoxItem';
-
-import { Row, Column } from './styles';
+import GridColumn from '../../../components/GridColumn';
+import GridRow from '../../../components/GridRow';
 
 function CadastroUsuario() {
    
@@ -189,31 +189,32 @@ function CadastroUsuario() {
            
           {localStorage.getItem('@fraIT/viewMode') === 'grid' ? (
             <BodyGrid>
-            <Row header={true}>
-              <Column grid='1'>Usuário</Column>
-              <Column grid='2.5'>E-mail</Column>
-              <Column grid='0.6'>Nome</Column>
-              <Column grid='1'>Sobrenome</Column>              
-              <Column grid='1'>Ativo?</Column>
-              <Column grid='0.5'>↕️</Column>
-              <Column grid='0'>🖊</Column>
-            </Row>
+            <GridRow header={true}>
+              <GridColumn grid='1'>Usuário</GridColumn>
+              <GridColumn grid='2.5'>E-mail</GridColumn>
+              <GridColumn grid='0.6'>Nome</GridColumn>
+              <GridColumn grid='1'>Sobrenome</GridColumn>              
+              <GridColumn grid='1'>Ativo?</GridColumn>
+              <GridColumn grid='0.5'>↕️</GridColumn>
+              <GridColumn grid='0'>🖊</GridColumn>
+            </GridRow>
             {(users.map (user => (
-              <Row>
+              <GridRow>
                 {(updatingUser) ? (
                   <input type='text' value={user.userName}/>
                 ):(
                   <>
-                <Column grid='1'>{user.userLoginName}</Column>
-                <Column grid='2.5'>{user.userEmail}</Column>
-                <Column grid='0.6'>{user.userName}</Column>
-                <Column grid='1'>{user.userSurName}</Column>             
-                <Column grid='1'>{user.userActive ? 'Ativo' : 'Inativo'}</Column>
-                <Column grid='0.5'>{user.userActive ? <button name={'Desativar'} icon={'❌'} onClick={(e) => handleUserActivation(e, user)}>Desativar</button>: <button name={'Ativar'} icon={'✔️'} onClick={ (e) => handleUserActivation(e, user)}>Ativar</button>}</Column>
-                <Column grid='0'>🖊️</Column>
+                <GridColumn grid='1'>{user.userLoginName}</GridColumn>
+                <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
+                <GridColumn grid='0.6'>{user.userName}</GridColumn>
+                <GridColumn grid='1'>{user.userSurName}</GridColumn>             
+                <GridColumn grid='1'>{user.userActive ? 'Ativo' : 'Inativo'}</GridColumn>
+                {/* <GridColumn grid='0.5'>{user.userActive ? <button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>Desativar</button>: <button name={'Ativar'} icon={'✔️'} onClick={ (e) => handleUserActivation(e, user)}>Ativar</button>}</GridColumn> */}
+                <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
+                <GridColumn grid='0'>🖊️</GridColumn>
                 </>
                 )}
-              </Row>
+              </GridRow>
             )))}
             </BodyGrid>
           ):(

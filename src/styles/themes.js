@@ -2,25 +2,29 @@ import theme from 'styled-theming';
 
 //header & body background
 export const primary = theme('mode', {
-    light: '#f1f1f1', 
+    /* light: '#f1f1f1',  */
+    light: '#d5d5d5', 
     dark: '#363740',
 });
 
 //cards, page, menuitems and focused items background
 export const secundary = theme('mode', {
-    light: '#f1f1f1',
+    /* light: '#f1f1f1', */
+    light: '#d5d5d5',
     dark: '#363740',
 });
 
 //Texts, links
 export const contrast = theme('mode', {
-    light: ' #2d2d2d',
+    /* light: ' #2d2d2d', */
+    light: '#080708',
     dark: '#DDE2FF',
 });
 
 //Notifications, highlights
 export const special = theme('mode', {
     light: '#3751FF',
+    /* light: '#96858f', */
     dark: '#7F6A93',    
 });
 
@@ -30,7 +34,8 @@ export const shadow = theme('mode', {
 });
 
 export const hover = theme('mode', {
-    light: '#28587B',
+    /* light: '#28587B', */
+    light: '#d5d5d5',
     dark: '#765D94',
 });
 
