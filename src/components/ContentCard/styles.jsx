@@ -18,13 +18,17 @@ export const Container = styled.div`
 
   border: 1px solid ${({theme}) => theme.CARD_BORDER};
   border-radius: 10px;
-  box-shadow: 2px 2px 0 ${({theme}) => theme.shadow};;
+  box-shadow: -2px 2px 5px 0 ${({theme}) => theme.CARD_BORDER_SHADOW};
 
-  margin: .8vh .5vw 0 .5vw; 
+  margin: 2vh .5vw 0 .5vw; 
 
   &:hover {
-    border: 1px solid ${({theme}) => theme.CARD_BORDER_HOVER};
-    box-shadow: 0 0 0;
+    /* border: 1px solid ${({theme}) => theme.CARD_BORDER_HOVER}; */
+    box-shadow: -2px 2px 15px 5px ${({theme}) => theme.CARD_BORDER_HOVER};
+
+    .cardHeader {
+      border-color: ${({theme}) => theme.CARD_HEADER_BORDER_HOVER};
+    }
   }
 
   .cardHeader {
@@ -32,7 +36,7 @@ export const Container = styled.div`
     padding: 1vh 0;
     margin-bottom: 15px;
 
-    border-bottom: 1px solid ${({theme}) => theme.contrast};
+    border-bottom: 1px solid ${({theme}) => theme.CARD_HEADER_BORDER};
   }
 
   .titulo {

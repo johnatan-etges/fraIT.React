@@ -1,6 +1,6 @@
 import theme from 'styled-theming';
 
-//import { HEADER_BACKGROUND } from './themes/dark';
+import { DARK_HEADER_BACKGROUND , DARK_BODY_CARD_BACKGROUND, DARK_CARD_BACKGROUND, DARK_CARD_TITLE, DARK_CARD_SUBTITLE, DARK_CARD_PARAGRAPH, DARK_CARD_BORDER, DARK_CARD_BORDER_HOVER, DARK_CARD_HEADER_BORDER, DARK_CARD_HEADER_BORDER_HOVER, DARK_CARD_BORDER_SHADOW, } from '../styles/themes/dark';
 
 //header & body background
 export const primary = theme('mode', {
@@ -55,3 +55,58 @@ export const sizes =  {
         tablet: '950px',
         mobile: '570px',    
 };
+
+export const HEADER_BACKGROUND = theme('mode', {
+    light: '',
+    dark: DARK_HEADER_BACKGROUND,
+});
+
+export const BODY_CARD_BACKGROUND = theme('mode', {
+    light: '',
+    dark: DARK_BODY_CARD_BACKGROUND,
+});
+
+export const CARD_BACKGROUND = theme('mode', {
+    light: '',
+    dark: DARK_CARD_BACKGROUND,
+});
+
+export const CARD_TITLE = theme('mode', {
+    light: '',
+    dark: DARK_CARD_TITLE,
+});
+
+export const CARD_SUBTITLE = theme('mode', {
+    light: '',
+    dark: DARK_CARD_SUBTITLE,
+});
+
+export const CARD_PARAGRAPH = theme('mode', {
+    light: '',
+    dark: DARK_CARD_PARAGRAPH,
+});
+
+export const CARD_BORDER = theme('mode', {
+    light: '',
+    dark: DARK_CARD_BORDER,
+});
+
+export const CARD_BORDER_HOVER = theme('mode', {
+    light: '',
+    dark: DARK_CARD_BORDER_HOVER,
+});
+
+export const CARD_HEADER_BORDER = theme('mode', {
+    light: '',
+    dark: DARK_CARD_HEADER_BORDER,
+});
+
+export const CARD_HEADER_BORDER_HOVER = theme('mode', {
+    light: '',
+    dark: DARK_CARD_HEADER_BORDER_HOVER,
+});
+
+export const CARD_BORDER_SHADOW = theme('mode', {
+    light: '',
+    dark: DARK_CARD_BORDER_SHADOW,
+});
