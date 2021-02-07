@@ -1,7 +1,8 @@
 import React, { useState, useContext, createContext } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { primary, secundary, contrast, special, shadow, sizes, hover, logoIT} from '../styles/themes';
+import { secundary, contrast, special, shadow, sizes, hover, logoIT} from '../styles/themes';
 
+import { HEADER_BACKGROUND , BODY_CARD_BACKGROUND, CARD_BACKGROUND, CARD_TITLE, CARD_SUBTITLE, CARD_PARAGRAPH, CARD_BORDER, CARD_BORDER_HOVER } from '../styles/themes/dark';
 const ThemeToggleContext = createContext({});
 
 export const useTheme = () => useContext(ThemeToggleContext);
@@ -13,7 +14,7 @@ export const MyThemeProvider = ({ children }) => {
   });
 
   const Wrapper = styled.div`
-    background-color: ${primary};
+    background-color: ${HEADER_BACKGROUND};
     color: ${contrast};
     width: 100vw;
     height: 100vh;    
@@ -33,7 +34,14 @@ export const MyThemeProvider = ({ children }) => {
         theme={{
           viewMode: themeState.viewMode,
           mode: themeState.mode,
-          primary: primary,
+          HEADER_BACKGROUND: HEADER_BACKGROUND,
+          BODY_CARD_BACKGROUND: BODY_CARD_BACKGROUND,
+          CARD_BACKGROUND: CARD_BACKGROUND,
+          CARD_TITLE: CARD_TITLE,
+          CARD_SUBTITLE: CARD_SUBTITLE,
+          CARD_PARAGRAPH: CARD_PARAGRAPH,
+          CARD_BORDER: CARD_BORDER,
+          CARD_BORDER_HOVER: CARD_BORDER_HOVER,
           secundary: secundary,
           contrast: contrast,
           special: special,

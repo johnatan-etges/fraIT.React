@@ -1,5 +1,7 @@
 import theme from 'styled-theming';
 
+//import { HEADER_BACKGROUND } from './themes/dark';
+
 //header & body background
 export const primary = theme('mode', {
     /* light: '#f1f1f1',  */
@@ -25,7 +27,7 @@ export const contrast = theme('mode', {
 export const special = theme('mode', {
     light: '#3751FF',
     /* light: '#96858f', */
-    dark: '#7F6A93',    
+    dark: '#6A2794',    //7F6A93 
 });
 
 export const shadow = theme('mode', {
@@ -36,7 +38,7 @@ export const shadow = theme('mode', {
 export const hover = theme('mode', {
     /* light: '#28587B', */
     light: '#d5d5d5',
-    dark: '#765D94',
+    dark: '#6A2794', //765D94
 });
 
 export const logoIT = theme('mode', {

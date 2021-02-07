@@ -3,6 +3,8 @@ import theme from 'styled-theming';
 
 export const Container = styled.div`
 
+  background-color: ${({theme}) => theme.CARD_BACKGROUND};
+
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -14,13 +16,15 @@ export const Container = styled.div`
 
   position: relative;
 
-  border: 1px solid ${({theme}) => theme.primary};
-  border-radius: 5px;
+  border: 1px solid ${({theme}) => theme.CARD_BORDER};
+  border-radius: 10px;
+  box-shadow: 2px 2px 0 ${({theme}) => theme.shadow};;
 
   margin: .8vh .5vw 0 .5vw; 
 
   &:hover {
-    border: 1px solid ${({theme}) => theme.contrast};
+    border: 1px solid ${({theme}) => theme.CARD_BORDER_HOVER};
+    box-shadow: 0 0 0;
   }
 
   .cardHeader {
@@ -32,17 +36,18 @@ export const Container = styled.div`
   }
 
   .titulo {
-    color: ${({theme}) => theme.special};
+    color: ${({theme}) => theme.CARD_TITLE};
     font-size: 2.2vh;
   }
 
   .subtitulo {
     font-size: 1.8vh;
-    color: ${({theme}) => theme.contrast};
+    color: ${({theme}) => theme.CARD_SUBTITLE};
   }
 
   .paragrafo {
     font-size: 2vh;
+    color: ${({theme}) => theme.CARD_PARAGRAPH};
   }
 
   @media (max-width: ${({theme}) => theme.tablet}) {

@@ -13,7 +13,7 @@ export const Container = styled.div`
 
   display: flex;
 
-  background-color: ${({theme}) => theme.primary};
+  background-color: ${({theme}) => theme.HEADER_BACKGROUND};
   filter: drop-shadow(0 .2vh .5vh ${({theme}) => theme.shadow});
 
   .title {
