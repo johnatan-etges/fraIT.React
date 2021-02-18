@@ -32,7 +32,6 @@ export const MyThemeProvider = ({ children }) => {
     >
       <ThemeProvider
         theme={{
-          viewMode: themeState.viewMode,
           mode: themeState.mode,
           HEADER_BACKGROUND: HEADER_BACKGROUND,
           BODY_CARD_BACKGROUND: BODY_CARD_BACKGROUND,

@@ -3,7 +3,9 @@ import theme from 'styled-theming';
 
 export const Container = styled.div`
 
+  /* background-color: ${({theme}) => theme.mode == 'dark' ? theme.CARD_BACKGROUND : 'transparent'}; */
   background-color: ${({theme}) => theme.CARD_BACKGROUND};
+  opacity: ${({theme}) => theme.mode == 'dark' ? 0.7 : 1};
 
   display: flex;
   flex-direction: column;
@@ -18,17 +20,18 @@ export const Container = styled.div`
 
   border: 1px solid ${({theme}) => theme.CARD_BORDER};
   border-radius: 10px;
-  box-shadow: -2px 2px 5px 0 ${({theme}) => theme.CARD_BORDER_SHADOW};
+  box-shadow: 2px 2px 20px 5px ${({theme}) => theme.CARD_BORDER_SHADOW};
 
-  margin: 2vh .5vw 0 .5vw; 
+  margin: 2rem 1rem; 
 
   &:hover {
-    /* border: 1px solid ${({theme}) => theme.CARD_BORDER_HOVER}; */
-    box-shadow: -2px 2px 15px 5px ${({theme}) => theme.CARD_BORDER_HOVER};
+    opacity: 1;
+    box-shadow: 2px 2px 25px 10px ${({theme}) => theme.CARD_BORDER_HOVER};
 
     .cardHeader {
       border-color: ${({theme}) => theme.CARD_HEADER_BORDER_HOVER};
     }
+
   }
 
   .cardHeader {
