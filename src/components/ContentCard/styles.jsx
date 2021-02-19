@@ -5,7 +5,7 @@ export const Container = styled.div`
 
   /* background-color: ${({theme}) => theme.mode == 'dark' ? theme.CARD_BACKGROUND : 'transparent'}; */
   background-color: ${({theme}) => theme.CARD_BACKGROUND};
-  opacity: ${({theme}) => theme.mode == 'dark' ? 0.7 : 1};
+  opacity: ${({theme}) => theme.CARD_OPACITY};
 
   display: flex;
   flex-direction: column;
@@ -20,13 +20,14 @@ export const Container = styled.div`
 
   border: 1px solid ${({theme}) => theme.CARD_BORDER};
   border-radius: 10px;
-  box-shadow: 2px 2px 20px 5px ${({theme}) => theme.CARD_BORDER_SHADOW};
+  box-shadow: /* 2px 2px 20px 5px */ ${({theme}) => theme.CARD_BORDER_SHADOW};
 
   margin: 2rem 1rem; 
 
   &:hover {
     opacity: 1;
-    box-shadow: 2px 2px 25px 10px ${({theme}) => theme.CARD_BORDER_HOVER};
+    box-shadow: ${({theme}) => theme.CARD_BORDER_HOVER};
+    transition: 0.3s ease;
 
     .cardHeader {
       border-color: ${({theme}) => theme.CARD_HEADER_BORDER_HOVER};
