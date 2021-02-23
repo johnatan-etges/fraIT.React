@@ -98,7 +98,9 @@ function Header({title}) {
       <Container>
         <Burger open={open} setOpen={setOpen} aria-controls={sideBarId}/>
         <Sidebar open={open} setOpen={setOpen} id={sideBarId} menuItems={menuItems}/>
-        <h1 className="title">{title}</h1>
+        <div className="title">
+          <h1>{title}</h1>
+        </div>
         <NavOptions />
       </Container>
   );

@@ -20,14 +20,16 @@ export const Container = styled.div`
 
   border: 1px solid ${({theme}) => theme.CARD_BORDER};
   border-radius: 10px;
-  box-shadow: /* 2px 2px 20px 5px */ ${({theme}) => theme.CARD_BORDER_SHADOW};
+  box-shadow: ${({theme}) => theme.CARD_BORDER_SHADOW};
 
   margin: 2rem 1rem; 
 
   &:hover {
     opacity: 1;
-    box-shadow: ${({theme}) => theme.CARD_BORDER_HOVER};
+    box-shadow: ${({theme}) => theme.CARD_BORDER_SHADOW_HOVER};
     transition: 0.3s ease;
+
+    border: 1px solid ${({theme}) => theme.CARD_BORDER_HOVER};
 
     .cardHeader {
       border-color: ${({theme}) => theme.CARD_HEADER_BORDER_HOVER};
