@@ -7,15 +7,19 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  margin: 75px auto -7vw;
+  margin: 80px auto -7vw;
 
   box-sizing: border-box;
   overflow: hidden;
 
   padding: 1vh 30px;
 
+  @media (max-width: ${({theme}) => theme.narrow}) {
+    font-size: 1rem;
+  }
+
   @media (max-width: ${({theme}) => theme.tablet}) {
-    width: 89vw;
+    /* width: 89vw; */
   }
 
   @media (max-width: ${({theme}) => theme.mobile}) {

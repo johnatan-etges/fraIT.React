@@ -3,6 +3,10 @@ import theme from 'styled-theming';
 
 export const Container = styled.div`
 
+  /* background-color: ${({theme}) => theme.mode == 'dark' ? theme.CARD_BACKGROUND : 'transparent'}; */
+  background-color: ${({theme}) => theme.CARD_BACKGROUND};
+  opacity: ${({theme}) => theme.CARD_OPACITY};
+
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -14,13 +18,23 @@ export const Container = styled.div`
 
   position: relative;
 
-  border: 1px solid ${({theme}) => theme.primary};
-  border-radius: 5px;
+  border: ${({theme}) => theme.CARD_BORDER};
+  border-radius: 10px;
+  box-shadow: ${({theme}) => theme.CARD_BORDER_SHADOW};
 
-  margin: .8vh .5vw 0 .5vw; 
+  margin: 2rem 1rem; 
 
   &:hover {
-    border: 1px solid ${({theme}) => theme.contrast};
+    opacity: 1;
+    /* box-shadow: ${({theme}) => theme.CARD_BORDER_SHADOW_HOVER}; */
+    /* transition: 0.3s ease; */
+
+    border: ${({theme}) => theme.CARD_BORDER_HOVER};
+
+    .cardHeader {
+      border-bottom: ${({theme}) => theme.CARD_HEADER_BORDER_HOVER};
+    }
+
   }
 
   .cardHeader {
@@ -28,21 +42,22 @@ export const Container = styled.div`
     padding: 1vh 0;
     margin-bottom: 15px;
 
-    border-bottom: 1px solid ${({theme}) => theme.contrast};
+    border-bottom: ${({theme}) => theme.CARD_HEADER_BORDER};
   }
 
   .titulo {
-    color: ${({theme}) => theme.special};
+    color: ${({theme}) => theme.CARD_TITLE};
     font-size: 2.2vh;
   }
 
   .subtitulo {
     font-size: 1.8vh;
-    color: ${({theme}) => theme.contrast};
+    color: ${({theme}) => theme.CARD_SUBTITLE};
   }
 
   .paragrafo {
     font-size: 2vh;
+    color: ${({theme}) => theme.CARD_PARAGRAPH};
   }
 
   @media (max-width: ${({theme}) => theme.tablet}) {

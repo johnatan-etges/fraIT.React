@@ -7,7 +7,7 @@ import Sidebar from '../../components/sidebar';
 import Burger from '../../components/burger';
 
 
-function Header({title}) {  
+function Header({title, title_full}) {  
 
   const [open, setOpen] = useState(false);  
   const sideBarId = "main-menu";
@@ -98,7 +98,12 @@ function Header({title}) {
       <Container>
         <Burger open={open} setOpen={setOpen} aria-controls={sideBarId}/>
         <Sidebar open={open} setOpen={setOpen} id={sideBarId} menuItems={menuItems}/>
-        <h1 className="title">{title}</h1>
+        <div className="title_resumido">
+          <h1>{title}</h1>
+        </div>
+        <div className="title_completo">
+          <h1>{title_full}</h1>
+        </div>
         <NavOptions />
       </Container>
   );

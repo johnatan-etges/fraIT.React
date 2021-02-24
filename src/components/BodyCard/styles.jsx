@@ -14,7 +14,7 @@ export const Container = styled.div`
 
   padding: 1vh 1vw;
 
-  background-color: ${({theme}) => theme.primary};
+  background-color: ${({theme}) => theme.BODY_CARD_BACKGROUND};
   filter: drop-shadow(0 0 2px ${({theme}) => theme.shadow});
 
   @media (max-width: ${({theme}) => theme.tablet}) {

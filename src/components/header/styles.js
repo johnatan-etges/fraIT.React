@@ -13,18 +13,66 @@ export const Container = styled.div`
 
   display: flex;
 
-  background-color: ${({theme}) => theme.primary};
+  background-color: ${({theme}) => theme.HEADER_BACKGROUND};
   filter: drop-shadow(0 .2vh .5vh ${({theme}) => theme.shadow});
 
-  .title {
-    margin-left: 5%;
+  .title_resumido {
+    display: none;
   }
 
-  @media (max-width: ${({theme}) => theme.narrow}){
-    .title {
-      font-size: 1rem;
-      margin-left: 20%;
+  .title_completo {
+    margin-left: 5%;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (max-width: ${({theme}) => theme.medium}){
+    .title_completo {
+
+      margin-left: 7%;
+
+      h1 {
+        font-size: 2rem;  
+      }
     }
   } 
+
+  @media (max-width: ${({theme}) => theme.tablet}){
+    .title_completo {
+
+      margin-left: 10%;
+    
+      h1 {
+        font-size: 1.5rem;  
+      }
+    }
+
+  }
+
+  @media (max-width: ${({theme}) => theme.mobile}){
+
+    .title_completo {
+      display: none;
+    }
+
+    .title_resumido {
+      display: flex;
+      margin-left: 15%;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  } 
+
+  @media (max-width: 450px){
+
+  .title_resumido {
+    display: flex;
+    margin-left: 20%;
+  }
+} 
 
 `;
