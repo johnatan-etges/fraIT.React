@@ -16,8 +16,12 @@ export const Container = styled.div`
   background-color: ${({theme}) => theme.HEADER_BACKGROUND};
   filter: drop-shadow(0 .2vh .5vh ${({theme}) => theme.shadow});
 
-  .title {
-    /* margin-left: 5%; */
+  .title_resumido {
+    display: none;
+  }
+
+  .title_completo {
+    margin-left: 5%;
 
     h1 {
       font-size: 2.5rem;
@@ -25,21 +29,50 @@ export const Container = styled.div`
   }
 
   @media (max-width: ${({theme}) => theme.medium}){
-    .title h1 {
-      font-size: 2rem;  
+    .title_completo {
+
+      margin-left: 7%;
+
+      h1 {
+        font-size: 2rem;  
+      }
     }
   } 
 
   @media (max-width: ${({theme}) => theme.tablet}){
-    .title h1 {
-      font-size: 1.5rem;  
+    .title_completo {
+
+      margin-left: 10%;
+    
+      h1 {
+        font-size: 1.5rem;  
+      }
     }
+
   }
 
   @media (max-width: ${({theme}) => theme.mobile}){
-    .title h1 {
-      font-size: 1rem;  
+
+    .title_completo {
+      display: none;
+    }
+
+    .title_resumido {
+      display: flex;
+      margin-left: 15%;
+
+      h1 {
+        font-size: 1.5rem;
+      }
     }
   } 
+
+  @media (max-width: 450px){
+
+  .title_resumido {
+    display: flex;
+    margin-left: 20%;
+  }
+} 
 
 `;

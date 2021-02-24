@@ -184,7 +184,7 @@ function CadastroUsuario() {
     
   return (
     <>
-      <Header title="Usuários cadastrados no sistema"/>      
+      <Header title="Usuários" title_full="Usuários cadastrados no sistema"/>      
            
           {localStorage.getItem('@fraIT/viewMode') === 'grid' ? (
             <BodyGrid>
@@ -192,7 +192,7 @@ function CadastroUsuario() {
                 <GridColumn grid='1'>Usuário</GridColumn>
                 <GridColumn grid='2.5'>E-mail</GridColumn>
                 <GridColumn grid='0.6'>Nome</GridColumn>
-                <GridColumn grid='1'>Sobrenome</GridColumn>              
+                {/* <GridColumn grid='1'>Sobrenome</GridColumn> */}
                 <GridColumn grid='1'>Ativo?</GridColumn>
                 <GridColumn grid='0.5'>↕️</GridColumn>
                 <GridColumn grid='0'>🖊</GridColumn>
@@ -206,7 +206,7 @@ function CadastroUsuario() {
                   <GridColumn grid='1'>{user.userLoginName}</GridColumn>
                   <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
                   <GridColumn grid='0.6'>{user.userName}</GridColumn>
-                  <GridColumn grid='1'>{user.userSurName}</GridColumn>             
+                  {/* <GridColumn grid='1'>{user.userSurName}</GridColumn> */}      
                   <GridColumn grid='1'>{user.userActive ? 'Ativo' : 'Inativo'}</GridColumn>
                   {/* <GridColumn grid='0.5'>{user.userActive ? <button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>Desativar</button>: <button name={'Ativar'} icon={'✔️'} onClick={ (e) => handleUserActivation(e, user)}>Ativar</button>}</GridColumn> */}
                   <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>

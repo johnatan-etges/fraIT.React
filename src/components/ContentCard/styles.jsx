@@ -18,7 +18,7 @@ export const Container = styled.div`
 
   position: relative;
 
-  border: 1px solid ${({theme}) => theme.CARD_BORDER};
+  border: ${({theme}) => theme.CARD_BORDER};
   border-radius: 10px;
   box-shadow: ${({theme}) => theme.CARD_BORDER_SHADOW};
 
@@ -26,13 +26,13 @@ export const Container = styled.div`
 
   &:hover {
     opacity: 1;
-    box-shadow: ${({theme}) => theme.CARD_BORDER_SHADOW_HOVER};
-    transition: 0.3s ease;
+    /* box-shadow: ${({theme}) => theme.CARD_BORDER_SHADOW_HOVER}; */
+    /* transition: 0.3s ease; */
 
-    border: 1px solid ${({theme}) => theme.CARD_BORDER_HOVER};
+    border: ${({theme}) => theme.CARD_BORDER_HOVER};
 
     .cardHeader {
-      border-color: ${({theme}) => theme.CARD_HEADER_BORDER_HOVER};
+      border-bottom: ${({theme}) => theme.CARD_HEADER_BORDER_HOVER};
     }
 
   }
@@ -42,7 +42,7 @@ export const Container = styled.div`
     padding: 1vh 0;
     margin-bottom: 15px;
 
-    border-bottom: 1px solid ${({theme}) => theme.CARD_HEADER_BORDER};
+    border-bottom: ${({theme}) => theme.CARD_HEADER_BORDER};
   }
 
   .titulo {
