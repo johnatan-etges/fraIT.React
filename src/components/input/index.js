@@ -2,18 +2,22 @@ import React, { useState } from 'react';
 
 import { Container } from './styles';
 
-function Input({type,label, onChange, onFocus, onBlur, setRef, spellCheck, width, ...props}) {
+function Input({type,label, onChange, onFocus, onBlur, setRef, spellCheck, width, id, ...props}) {
 
   const [focused, setFocused] = useState(false);
 
   function handleOnFocus() {    
       setFocused(true);
-      onFocus(); 
+      onFocus && onFocus(); 
   }
 
   function handleOnBlur(e) {
     e.target.value ? setFocused(true) : setFocused(false);
-    onBlur();
+    onBlur && onBlur(e.target.value);
+  }
+
+  function handleOnChange(e) {
+    onChange && onChange(e.target.value);
   }
 
   const renderLabel = () => label && <label>{ label }</label>
@@ -21,9 +25,11 @@ function Input({type,label, onChange, onFocus, onBlur, setRef, spellCheck, width
   return (
     <Container focused={focused} width={width}>
       {renderLabel()}
-      <input        
+      <input
+        id={id}     
         type={type}
-        onChange={e => onChange(e.target.value)}
+        /* onChange={e => onChange(e.target.value)} */
+        onChange={handleOnChange}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
         ref={ref => setRef(ref)}
@@ -39,8 +45,8 @@ Input.defaultProps = {
   label: "",
   width: '100%',
   spellCheck: true,
-  onFocus: () => {},
-  onBlur: () => {},
+  /* onFocus: () => {}, */
+  /* onBlur: () => {}, */
   setRef: () => {},
 }
 

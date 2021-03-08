@@ -4,7 +4,8 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import Route from './Route';
 import Signin from '../pages/SignIn';
 import Dashboard from '../pages/Dashboard';
-import CadastroUsuario from '../pages/cadastros/usuario';
+import UsuariosSistema from '../pages/cadastros/usuario';
+import NewUser from '../pages/cadastros/usuario/new-user';
 import SecretariasLocais from '../pages/cadastros/secretarias-locais';
 
 function routes() {  
@@ -13,7 +14,8 @@ function routes() {
       <Switch>      
         <Route path="/" exact component={Signin}/>
         <Route path="/dashboard" component={Dashboard} isPrivate/>
-        <Route path="/cadastros/usuario" component={CadastroUsuario} isPrivate/>
+        <Route path="/cadastros/usuario" exact component={UsuariosSistema} isPrivate/>
+        <Route path="/cadastros/usuario/new" exact component={NewUser} isPrivate/>
         <Route path="/cadastros/secretarias-locais" component={SecretariasLocais} isPrivate/>
       </Switch>
     </BrowserRouter>      

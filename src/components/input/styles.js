@@ -12,7 +12,7 @@ export const Container = styled.div`
     border: 1px solid ${({theme}) => theme.contrast};
     background-color: transparent;
     outline: none;
-    padding: .75rem 0 .75rem 1.5rem;
+    padding: .75rem 1.5rem .75rem 1.5rem;
     font-size: 1rem;
     color: ${({theme}) => theme.contrast};
     caret-color: ${({theme}) => theme.contrast};
@@ -26,7 +26,7 @@ export const Container = styled.div`
     }
 
     ::selection {
-      background-color: ${({theme}) => theme.contrast};
+      background-color: ${({theme}) => theme.special};
     }    
   }
   
@@ -37,14 +37,14 @@ export const Container = styled.div`
     font-weight: 800;
     top: .5rem;
     transition: all .2s ease;
-    margin-left: .5rem;
+    margin-left: 1rem;
     background-color: ${({theme}) => theme.primary};
 
     ${props => props.focused && `
       font-size: .9rem;
-      transform: translate(-1.1rem, -1.2rem);
+      transform: translate(0, -1.2rem);
       z-index: 501;
-      padding: 0 .5rem;
+      padding: 0 .1rem 0 .1rem;
     `}
   }
 `;

@@ -14,7 +14,7 @@ import OptionsBoxItem from '../../../components/optionsBoxItem';
 import GridColumn from '../../../components/GridColumn';
 import GridRow from '../../../components/GridRow';
 
-function CadastroUsuario() {
+function UsuariosSistema() {
    
     const initialState={
       loading: false,
@@ -236,4 +236,4 @@ function CadastroUsuario() {
     </>
   )
 }
-export default CadastroUsuario;
+export default UsuariosSistema;
