@@ -48,8 +48,6 @@ function UsuariosSistema() {
       });
 
       (response) ? loadUsers() : toast.error("Não foi possível atualizar", {position: toast.POSITION.TOP_RIGHT});
-
-      //console.log(user);
     }
 
     async function handleLoadUpdateForm(user) {
@@ -170,7 +168,7 @@ function UsuariosSistema() {
                 </ContentCard>
               )))}
             </BodyCard>
-          )}
+          )}         
       <Footer/>
     </>
   )
