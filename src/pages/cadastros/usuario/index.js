@@ -35,67 +35,6 @@ function UsuariosSistema() {
       loadUsers();
     },[]);    
 
-    async function handleAddUser(user) {      
-      /* setData({
-        ...data,
-        loading: true,
-      });
-
-      try {
-        const response = await api.post('/users/signup', {
-          name: user.name,
-          surName: user.surName,
-          login: user.login,
-          email: user.email,
-          password: user.password,
-          avatarURL: user.avatarURL,
-        });        
-
-        if (response) {
-          toast.success("Usuário criado com sucesso!",{
-            position: toast.POSITION.TOP_RIGHT,
-          });
-        }
-
-        setUsers([
-          ...users,
-          {         
-          id: response.data.user.id,
-          userName: response.data.user.userName,
-          userSurName: response.data.user.userSurName,
-          userLoginName: response.data.user.userLoginName,
-          userEmail: response.data.user.userEmail,
-          userActive: response.data.user.userActive,         
-          }
-        ]);
-
-        setData({
-          ...data,
-          loading: false,
-        });
-
-      } catch (error) {
-
-        if (error.response.status === 400) {
-          toast.error("Nome de usuário e/ou senha já existe(m).",{
-            position: toast.POSITION.TOP_RIGHT,
-          })
-        }
-        if (error.response.status === 406) {
-          toast.error("Há campos não preenchidos, favor verificar!", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-        }
-
-        setData({
-          ...data,
-          loading: false,
-        });
-      }      */
-
-      console.log('ok');
-    };
-
     async function handleUserActivation(e, user) {
 
       e.preventDefault();

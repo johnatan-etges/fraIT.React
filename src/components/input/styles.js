@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: ${props => props.width};
+  width: ${props => props.width || "100%"};
   display: flex;
   flex-direction: column;
   margin: .9375rem 0;
+  
+  //postion needs to be relative to accept label float on it
   position: relative;
   transition: all .2s ease;
+
+  &:first-child{
+    margin-right: 1rem;
+  }
 
   & > input {
     border: 1px solid ${({theme}) => theme.contrast};

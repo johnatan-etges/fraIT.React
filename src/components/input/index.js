@@ -43,7 +43,7 @@ function Input({type,label, onChange, onFocus, onBlur, setRef, spellCheck, width
 Input.defaultProps = {
   type: "text",
   label: "",
-  width: '100%',
+  /* width: '100%', */
   spellCheck: true,
   /* onFocus: () => {}, */
   /* onBlur: () => {}, */

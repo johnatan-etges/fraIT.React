@@ -59,7 +59,7 @@ function Header({title, title_full}) {
       linkName: 'Cadastros',
       menuItem: [
         {
-          target: '/cadastros/usuario',
+          target: '/cadastros/usuarios',
           open: open,
           icon: '👥',
           linkName: 'Usuários',

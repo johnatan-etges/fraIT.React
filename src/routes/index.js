@@ -14,8 +14,8 @@ function routes() {
       <Switch>      
         <Route path="/" exact component={Signin}/>
         <Route path="/dashboard" component={Dashboard} isPrivate/>
-        <Route path="/cadastros/usuario" exact component={UsuariosSistema} isPrivate/>
-        <Route path="/cadastros/usuario/new" exact component={NewUser} isPrivate/>
+        <Route path="/cadastros/usuarios" exact component={UsuariosSistema} isPrivate/>
+        <Route path="/cadastros/usuarios/novo" exact component={NewUser} isPrivate/>
         <Route path="/cadastros/secretarias-locais" component={SecretariasLocais} isPrivate/>
       </Switch>
     </BrowserRouter>      

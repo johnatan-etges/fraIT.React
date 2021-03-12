@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import BodyCard from '../../../../components/BodyCard';
+import BodyForm from '../../../../components/BodyForm';
 import Header from '../../../../components/header';
 import Footer from '../../../../components/footer';
 import Input from '../../../../components/input';
+import SendFormBtn from '../../../../components/SendFormBtn';
 
 import api from '../../../../services/api';
-
-// import { Container } from './styles';
 
 function NewUser() {
 
@@ -24,9 +24,7 @@ function NewUser() {
         avatarURL: "",
     });
 
-    useEffect(() => {
-        console.log(data);
-    },[data])
+    const history = useHistory();
 
     function validaSenha(password) {
         if (password != data.passToVerify) {
@@ -50,6 +48,8 @@ function NewUser() {
             toast.success("Usuário criado com sucesso!", {
                 position: toast.POSITION_TOP_RIGHT,
             });
+            
+            history.push("/cadastros/usuarios");
         })
         .catch (err => {                
             switch (err.response.status) {
@@ -75,50 +75,72 @@ function NewUser() {
         })
     }
 
+    function cancelaInclusao() {
+        setData({});
+    }
+
   return (
     <>
         <Header/>
-        <BodyCard>
+        <BodyForm>
             <Input
                 id={"user_login"}
                 type={"text"}
-                label={"Nome de usuário"}
+                label={"Nome de usuário"}                
                 onBlur={value => setData({...data, login: value})}
             />
+            <div className="flex-row">
             <Input
                 id={"user_name"}
                 type={"text"}
                 label={"Nome"}
+                width={"60%"}
                 onBlur={value => setData({...data, name: value})}
             />
             <Input
                 id={"user_surName"}
                 type={"text"}
                 label={"Sobrenome"}
+                width={"40%"}
                 onBlur={value => setData({...data, surName: value})}
             />
+            </div>
+            
             <Input
                 id={"email"}
                 type={"text"}
                 label={"E-mail"}
                 onBlur={value => setData({...data, email: value})}
             />
+            <div className="flex-row">
             <Input
                 id={"senha"}
                 type={"password"}
                 label={"Senha"}
+                width={"50%"}
                 onBlur={value => setData({...data, passToVerify: value})}
             />
             <Input
                 id={"confirmar-senha"}
                 type={"password"}
                 label={"Repita a senha"}
+                width={"50%"}
                 onBlur={value => validaSenha(value)}
             />
-
-            <button onClick={() => createUser()}>Criar usuário</button>
-
-        </BodyCard>
+            </div>
+            <div className={"flex-row"}>
+            <SendFormBtn
+                onClick={() => createUser()}
+                text={"Criar usuário"}
+                width={"30%"}    
+            />
+            <SendFormBtn
+                onClick={() => cancelaInclusao()}
+                text={"Cancelar"}
+                width={"50%"}
+            />
+            </div>
+        </BodyForm>
         <Footer/>
     </>
   )

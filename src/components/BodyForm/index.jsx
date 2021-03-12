@@ -8,10 +8,7 @@ function Body(props) {
   return (
       <Container>
         <PerfectScrollBar
-          options={{
-            wheelSpeed:2,
-          }
-          }
+          style={{width: '100%'}}
         >
         {props.children}
       </PerfectScrollBar>
