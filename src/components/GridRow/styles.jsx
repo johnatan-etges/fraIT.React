@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const GRow = styled.div`
     width: 100%;
     height: auto;
-    float: left;
+    /* float: left; */
     box-sizing: border-box;
     ::before,
     ::after {
@@ -16,6 +16,6 @@ export const GRow = styled.div`
 
     border-bottom: 1px solid ${({theme}) => theme.special};
 
-    font-size: ${props => props.header ? '2rem' : '1rem'};
+    font-size: ${props => props.header ? '1.5rem' : '1rem'};
     font-weight: ${props => props.header ? 'bold' : 'normal'};
 `;
