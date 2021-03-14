@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
@@ -12,19 +12,34 @@ import SendFormBtn from '../../../../components/SendFormBtn';
 
 import api from '../../../../services/api';
 
-function NewUser() {
+function NewUser(props) {
+
+    const { user, title, title_full } = props.location.state;
 
     const [data, setData] = useState({
+        /* id: "",
         name: "",
         surName: "",
         login: "",
         email: "",
         passToVerify: "",
         password: "",
-        avatarURL: "",
+        avatarURL: "", */
+        id: user.id || "",
+        name: user.userName || "",
+        surName: user.userSurName|| "",
+        login: user.userLoginName || "",
+        email: user.userEmail|| "",
+        passToVerify: "",
+        password: "",
+        avatarURL: user.userAvatarURL|| "",
     });
 
     const history = useHistory();
+
+    /* useEffect(() => {
+        console.log("Usuário: " , user , " dados: " , data);
+    },[]) */
 
     function validaSenha(password) {
         if (password != data.passToVerify) {
@@ -75,18 +90,15 @@ function NewUser() {
         })
     }
 
-    function cancelaInclusao() {
-        setData({});
-    }
-
   return (
     <>
-        <Header/>
+        <Header title={title} title_full={title_full}/>
         <BodyForm>
             <Input
                 id={"user_login"}
                 type={"text"}
-                label={"Nome de usuário"}                
+                label={"Nome de usuário"}
+                value={data.login}           
                 onBlur={value => setData({...data, login: value})}
             />
             <div className="flex-row">
@@ -95,6 +107,7 @@ function NewUser() {
                 type={"text"}
                 label={"Nome"}
                 width={"60%"}
+                value={data.name}
                 onBlur={value => setData({...data, name: value})}
             />
             <Input
@@ -102,6 +115,7 @@ function NewUser() {
                 type={"text"}
                 label={"Sobrenome"}
                 width={"40%"}
+                value={data.surName}
                 onBlur={value => setData({...data, surName: value})}
             />
             </div>
@@ -110,6 +124,9 @@ function NewUser() {
                 id={"email"}
                 type={"text"}
                 label={"E-mail"}
+                value={data.email}
+                /* onChange={value => setData({...data, email: value})} */
+                onChange={value => console.log(value)}
                 onBlur={value => setData({...data, email: value})}
             />
             <div className="flex-row">
@@ -117,7 +134,7 @@ function NewUser() {
                 id={"senha"}
                 type={"password"}
                 label={"Senha"}
-                width={"50%"}
+                width={"50%"}                
                 onBlur={value => setData({...data, passToVerify: value})}
             />
             <Input
@@ -135,7 +152,7 @@ function NewUser() {
                 width={"30%"}    
             />
             <SendFormBtn
-                onClick={() => cancelaInclusao()}
+                onClick={() => history.goBack()}
                 text={"Cancelar"}
                 width={"50%"}
             />

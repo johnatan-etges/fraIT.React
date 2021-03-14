@@ -1,6 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { Link } from "react-router-dom";
 
 import api from '../../../services/api';
 
@@ -33,7 +36,12 @@ function UsuariosSistema() {
 
     useEffect(() => {
       loadUsers();
-    },[]);    
+    },[]);
+
+    /* function loadDataForUpdate(user) {
+        const history = useHistory();
+        history.push("/cadastros/usuarios/new", )
+    } */
 
     async function handleUserActivation(e, user) {
 
@@ -147,7 +155,19 @@ function UsuariosSistema() {
                   <GridColumn grid='1'>{user.userActive ? 'Ativo' : 'Inativo'}</GridColumn>
                   {/* <GridColumn grid='0.5'>{user.userActive ? <button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>Desativar</button>: <button name={'Ativar'} icon={'✔️'} onClick={ (e) => handleUserActivation(e, user)}>Ativar</button>}</GridColumn> */}
                   <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
-                  <GridColumn grid='0'>🖊️</GridColumn>
+                  <GridColumn grid='0'>
+                    <Link
+                      to={{
+                        pathname: '/cadastros/usuarios/novo',
+                        state: {
+                          user,
+                          title_full: `Editando o usuário: ${user.userName}`,
+                          title: `Editando: ${user.userName}`,
+                        }
+                      }}>
+                      🖊️
+                    </Link>
+                  </GridColumn>
                   </>
                   )}
                 </GridRow>

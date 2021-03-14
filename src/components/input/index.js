@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Container } from './styles';
 
-function Input({type,label, onChange, onFocus, onBlur, setRef, spellCheck, width, id, ...props}) {
+function Input({value, type,label, onChange, onFocus, onBlur, setRef, spellCheck, width, id, ...props}) {
 
   const [focused, setFocused] = useState(false);
+  const [valueForInput, setValueForInput] =  useState('');
 
-  function handleOnFocus() {    
+  useEffect(() => {
+    value ? setFocused(true) : setFocused(false)
+    setValueForInput({...valueForInput, value})
+  },[])
+
+  function handleOnFocus() {
       setFocused(true);
       onFocus && onFocus(); 
   }
@@ -34,6 +40,7 @@ function Input({type,label, onChange, onFocus, onBlur, setRef, spellCheck, width
         onBlur={handleOnBlur}
         ref={ref => setRef(ref)}
         spellCheck={spellCheck}
+        value={valueForInput.value}
         {...props}
       />
     </Container>
@@ -48,6 +55,7 @@ Input.defaultProps = {
   /* onFocus: () => {}, */
   /* onBlur: () => {}, */
   setRef: () => {},
+  value:""
 }
 
 export default Input;
