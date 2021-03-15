@@ -63,6 +63,13 @@ function Header({title, title_full}) {
           open: open,
           icon: '👥',
           linkName: 'Usuários',
+          menuItem: [
+            {
+              target: '/cadastros/usuarios/novo',
+              open: open,
+              linkName: 'Usuários',
+            }
+          ]
         },
         {
           target: '/cadastros/secretarias-locais',

@@ -161,8 +161,8 @@ function UsuariosSistema() {
                         pathname: '/cadastros/usuarios/novo',
                         state: {
                           user,
-                          title_full: `Editando o usuário: ${user.userName}`,
                           title: `Editando: ${user.userName}`,
+                          title_full: `Editando o usuário: ${user.userName}`
                         }
                       }}>
                       🖊️
@@ -188,7 +188,23 @@ function UsuariosSistema() {
                 </ContentCard>
               )))}
             </BodyCard>
-          )}         
+          )}
+          <Link to={{
+              pathname: "/cadastros/usuarios/novo",
+              state: {
+                user: {
+                  id: "",
+                  userName: "",
+                  userSurName: "",
+                  userLoginName: "",
+                  userEmail: "",
+                  userAvatarURL: "",
+                },
+                title: "Novo usuário",
+                title_full: "Criando novo usuário",
+              }
+            }}
+            >Novo usuário</Link>
       <Footer/>
     </>
   )

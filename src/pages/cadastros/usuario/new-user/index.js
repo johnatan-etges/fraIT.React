@@ -15,16 +15,12 @@ import api from '../../../../services/api';
 function NewUser(props) {
 
     const { user, title, title_full } = props.location.state;
+    const history = useHistory();
+
+    /* const title = user ? `Editando: ${user.userName}` : "Novo usuário";
+    const title_full = user ? `Editando o usuário: ${user.userName}` : "Criando novo usuário"; */
 
     const [data, setData] = useState({
-        /* id: "",
-        name: "",
-        surName: "",
-        login: "",
-        email: "",
-        passToVerify: "",
-        password: "",
-        avatarURL: "", */
         id: user.id || "",
         name: user.userName || "",
         surName: user.userSurName|| "",
@@ -34,8 +30,6 @@ function NewUser(props) {
         password: "",
         avatarURL: user.userAvatarURL|| "",
     });
-
-    const history = useHistory();
 
     /* useEffect(() => {
         console.log("Usuário: " , user , " dados: " , data);
@@ -91,19 +85,21 @@ function NewUser(props) {
     }
 
   return (
-    <>
+    <>        
         <Header title={title} title_full={title_full}/>
         <BodyForm>
             <Input
                 id={"user_login"}
+                name={"user_login"}
                 type={"text"}
                 label={"Nome de usuário"}
-                value={data.login}           
+                value={data.login}
                 onBlur={value => setData({...data, login: value})}
             />
             <div className="flex-row">
             <Input
                 id={"user_name"}
+                name={"user_name"}
                 type={"text"}
                 label={"Nome"}
                 width={"60%"}
@@ -112,6 +108,7 @@ function NewUser(props) {
             />
             <Input
                 id={"user_surName"}
+                name={"user_surname"}
                 type={"text"}
                 label={"Sobrenome"}
                 width={"40%"}
@@ -122,6 +119,7 @@ function NewUser(props) {
             
             <Input
                 id={"email"}
+                name={"user_email"}
                 type={"text"}
                 label={"E-mail"}
                 value={data.email}
@@ -131,14 +129,16 @@ function NewUser(props) {
             />
             <div className="flex-row">
             <Input
-                id={"senha"}
+                id={"user_passwd"}
+                name={"user_passwd"}
                 type={"password"}
                 label={"Senha"}
                 width={"50%"}                
                 onBlur={value => setData({...data, passToVerify: value})}
             />
             <Input
-                id={"confirmar-senha"}
+                id={"verify-passwd"}
+                name={"verify-passwd"}
                 type={"password"}
                 label={"Repita a senha"}
                 width={"50%"}

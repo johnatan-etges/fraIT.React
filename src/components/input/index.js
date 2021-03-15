@@ -5,11 +5,9 @@ import { Container } from './styles';
 function Input({value, type,label, onChange, onFocus, onBlur, setRef, spellCheck, width, id, ...props}) {
 
   const [focused, setFocused] = useState(false);
-  const [valueForInput, setValueForInput] =  useState('');
 
   useEffect(() => {
     value ? setFocused(true) : setFocused(false)
-    setValueForInput({...valueForInput, value})
   },[])
 
   function handleOnFocus() {
@@ -40,7 +38,7 @@ function Input({value, type,label, onChange, onFocus, onBlur, setRef, spellCheck
         onBlur={handleOnBlur}
         ref={ref => setRef(ref)}
         spellCheck={spellCheck}
-        value={valueForInput.value}
+        defaultValue={value}
         {...props}
       />
     </Container>
@@ -50,10 +48,7 @@ function Input({value, type,label, onChange, onFocus, onBlur, setRef, spellCheck
 Input.defaultProps = {
   type: "text",
   label: "",
-  /* width: '100%', */
   spellCheck: true,
-  /* onFocus: () => {}, */
-  /* onBlur: () => {}, */
   setRef: () => {},
   value:""
 }
