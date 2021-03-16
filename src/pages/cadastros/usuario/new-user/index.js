@@ -14,11 +14,13 @@ import api from '../../../../services/api';
 
 function NewUser(props) {
 
-    const { user, title, title_full } = props.location.state;
-    const history = useHistory();
+    const { user, title, title_full } = props.location.state.payload;
 
-    /* const title = user ? `Editando: ${user.userName}` : "Novo usuário";
-    const title_full = user ? `Editando o usuário: ${user.userName}` : "Criando novo usuário"; */
+    /* useEffect(() => {
+        console.log(user, title, title_full);
+    },[]) */
+
+    const history = useHistory();
 
     const [data, setData] = useState({
         id: user.id || "",
@@ -30,10 +32,6 @@ function NewUser(props) {
         password: "",
         avatarURL: user.userAvatarURL|| "",
     });
-
-    /* useEffect(() => {
-        console.log("Usuário: " , user , " dados: " , data);
-    },[]) */
 
     function validaSenha(password) {
         if (password != data.passToVerify) {

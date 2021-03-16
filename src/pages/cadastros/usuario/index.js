@@ -16,6 +16,7 @@ import OptionBox from '../../../components/optionsBox';
 import OptionsBoxItem from '../../../components/optionsBoxItem';
 import GridColumn from '../../../components/GridColumn';
 import GridRow from '../../../components/GridRow';
+import LinkToPage from '../../../components/linkToPage';
 
 function UsuariosSistema() {
    
@@ -38,11 +39,6 @@ function UsuariosSistema() {
       loadUsers();
     },[]);
 
-    /* function loadDataForUpdate(user) {
-        const history = useHistory();
-        history.push("/cadastros/usuarios/new", )
-    } */
-
     async function handleUserActivation(e, user) {
 
       e.preventDefault();
@@ -58,15 +54,15 @@ function UsuariosSistema() {
       (response) ? loadUsers() : toast.error("Não foi possível atualizar", {position: toast.POSITION.TOP_RIGHT});
     }
 
-    async function handleLoadUpdateForm(user) {
+    /* async function handleLoadUpdateForm(user) {
       setData({
         ...data,        
         updating: true,
       });
       setUpdatingUser(user);
-    }
+    } */
 
-    async function handleUserUpdate(user) {         
+    /* async function handleUserUpdate(user) {         
       try {
         await api.put('/users/update',{
           id: user.id,
@@ -93,16 +89,16 @@ function UsuariosSistema() {
         });
         setUpdatingUser(null);
       }
-    }
+    } */
 
-    function handleCancelUpdate() {
+    /* function handleCancelUpdate() {
       setData({
         ...data,
         updating: false,
         loading: false,
       });
       setUpdatingUser(null);     
-    }
+    } */
 
     async function handleSearch(searchTerm) {
       if(searchTerm) {
@@ -129,82 +125,76 @@ function UsuariosSistema() {
     
   return (
     <>
-      <Header title="Usuários" title_full="Usuários cadastrados no sistema"/>      
-           
-          {localStorage.getItem('@fraIT/viewMode') === 'grid' ? (
-            <BodyGrid>
-              <GridRow header={true}>
-                <GridColumn grid='1'>Usuário</GridColumn>
-                <GridColumn grid='2.5'>E-mail</GridColumn>
-                <GridColumn grid='0.6'>Nome</GridColumn>
-                {/* <GridColumn grid='1'>Sobrenome</GridColumn> */}
-                <GridColumn grid='1'>Ativo?</GridColumn>
-                <GridColumn grid='0.5'>↕️</GridColumn>
-                <GridColumn grid='0'>🖊</GridColumn>
-              </GridRow>
-              {(users.map (user => (
-                <GridRow>
-                  {(updatingUser) ? (
-                    <input type='text' value={user.userName}/>
-                  ):(
-                    <>
-                  <GridColumn grid='1'>{user.userLoginName}</GridColumn>
-                  <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
-                  <GridColumn grid='0.6'>{user.userName}</GridColumn>
-                  {/* <GridColumn grid='1'>{user.userSurName}</GridColumn> */}      
-                  <GridColumn grid='1'>{user.userActive ? 'Ativo' : 'Inativo'}</GridColumn>
-                  {/* <GridColumn grid='0.5'>{user.userActive ? <button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>Desativar</button>: <button name={'Ativar'} icon={'✔️'} onClick={ (e) => handleUserActivation(e, user)}>Ativar</button>}</GridColumn> */}
-                  <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
-                  <GridColumn grid='0'>
-                    <Link
-                      to={{
-                        pathname: '/cadastros/usuarios/novo',
-                        state: {
-                          user,
-                          title: `Editando: ${user.userName}`,
-                          title_full: `Editando o usuário: ${user.userName}`
-                        }
-                      }}>
-                      🖊️
-                    </Link>
-                  </GridColumn>
-                  </>
-                  )}
-                </GridRow>
-              )))}
-            </BodyGrid>
-          ):(
-            <BodyCard>     
-              {(users.map (user =>(
-                <ContentCard>
-                  <div className='cardHeader'>
-                    <h3 className='titulo'>{user.userName}</h3>
-                    <span className='subtitulo'>{user.userLoginName}</span>
-                  </div>
-                  <p className='paragrafo'>{user.userEmail}</p>
-                  <OptionBox>               
-                    <OptionsBoxItem name={'Desativar'} onClick={handleUserActivation}/>
-                </OptionBox>
-                </ContentCard>
-              )))}
-            </BodyCard>
-          )}
-          <Link to={{
-              pathname: "/cadastros/usuarios/novo",
-              state: {
-                user: {
-                  id: "",
-                  userName: "",
-                  userSurName: "",
-                  userLoginName: "",
-                  userEmail: "",
-                  userAvatarURL: "",
-                },
-                title: "Novo usuário",
-                title_full: "Criando novo usuário",
-              }
-            }}
-            >Novo usuário</Link>
+      <Header title="Usuários" title_full="Usuários cadastrados no sistema"/>
+      {localStorage.getItem('@fraIT/viewMode') === 'grid' ? 
+      (
+        <BodyGrid>
+          <GridRow header={true}>
+            <GridColumn grid='1'>Usuário</GridColumn>
+            <GridColumn grid='2.5'>E-mail</GridColumn>
+            <GridColumn grid='0.6'>Nome</GridColumn>
+            {/* <GridColumn grid='1'>Sobrenome</GridColumn> */}
+            <GridColumn grid='1'>Ativo?</GridColumn>
+            <GridColumn grid='0.5'>↕️</GridColumn>
+            <GridColumn grid='0'>🖊</GridColumn>
+          </GridRow>
+          {(users.map (user => 
+          (
+            <GridRow>
+              <GridColumn grid='1'>{user.userLoginName}</GridColumn>
+              <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
+              <GridColumn grid='0.6'>{user.userName}</GridColumn>
+              {/* <GridColumn grid='1'>{user.userSurName}</GridColumn> */}      
+              <GridColumn grid='1'>{user.userActive ? 'Ativo' : 'Inativo'}</GridColumn>
+              {/* <GridColumn grid='0.5'>{user.userActive ? <button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>Desativar</button>: <button name={'Ativar'} icon={'✔️'} onClick={ (e) => handleUserActivation(e, user)}>Ativar</button>}</GridColumn> */}
+              <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
+              <GridColumn grid='0'>
+                <LinkToPage
+                  pathname={"/cadastros/usuarios/alterar"}
+                  description={"🖊️"}
+                  payload={{
+                    user,
+                    title: `Editando: ${user.userName}`,
+                    title_full: `Editando o usuário: ${user.userName}`
+                  }}
+                />
+              </GridColumn>              
+            </GridRow>
+          )))}
+        </BodyGrid>
+      ):
+      (
+        <BodyCard>     
+          {(users.map (user =>(
+            <ContentCard>
+              <div className='cardHeader'>
+                <h3 className='titulo'>{user.userName}</h3>
+                <span className='subtitulo'>{user.userLoginName}</span>
+              </div>
+              <p className='paragrafo'>{user.userEmail}</p>
+              <OptionBox>               
+                <OptionsBoxItem name={'Desativar'} onClick={handleUserActivation}/>
+            </OptionBox>
+            </ContentCard>
+          )))}
+        </BodyCard>
+      )}
+      <LinkToPage
+        pathname={"/cadastros/usuarios/novo"}
+        description={"Novo usuário"}
+        payload={{
+          user: {
+            id: "",
+            userName: "",
+            userSurName: "",
+            userLoginName: "",
+            userEmail: "",
+            userAvatarURL: "",
+          },
+          title: "Novo usuário",
+          title_full: "Criando novo usuário",
+        }}
+      />
       <Footer/>
     </>
   )

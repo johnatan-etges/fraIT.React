@@ -16,6 +16,7 @@ function routes() {
         <Route path="/dashboard" component={Dashboard} isPrivate/>
         <Route path="/cadastros/usuarios" exact component={UsuariosSistema} isPrivate/>
         <Route path="/cadastros/usuarios/novo" exact component={NewUser} isPrivate/>
+        <Route path="/cadastros/usuarios/alterar" exact component={NewUser} isPrivate/>
         <Route path="/cadastros/secretarias-locais" component={SecretariasLocais} isPrivate/>
       </Switch>
     </BrowserRouter>      
