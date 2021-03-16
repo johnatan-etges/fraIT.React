@@ -16,7 +16,9 @@ import OptionBox from '../../../components/optionsBox';
 import OptionsBoxItem from '../../../components/optionsBoxItem';
 import GridColumn from '../../../components/GridColumn';
 import GridRow from '../../../components/GridRow';
-import LinkToPage from '../../../components/linkToPage';
+import AddNewItemGrid from '../../../components/addNewItemGrid';
+import AddNewItemCard from '../../../components/addNewItemCard';
+import EditItem from '../../../components/editItem';
 
 function UsuariosSistema() {
    
@@ -129,6 +131,23 @@ function UsuariosSistema() {
       {localStorage.getItem('@fraIT/viewMode') === 'grid' ? 
       (
         <BodyGrid>
+          <AddNewItemGrid
+        pathname={"/cadastros/usuarios/novo"}
+        description={"Novo usuário"}
+        payload={{
+          user: {
+            id: "",
+            userName: "",
+            userSurName: "",
+            userLoginName: "",
+            userEmail: "",
+            userAvatarURL: "",
+            valid: false
+          },
+          title: "Novo usuário",
+          title_full: "Criando novo usuário",
+        }}
+      />
           <GridRow header={true}>
             <GridColumn grid='1'>Usuário</GridColumn>
             <GridColumn grid='2.5'>E-mail</GridColumn>
@@ -149,7 +168,7 @@ function UsuariosSistema() {
               {/* <GridColumn grid='0.5'>{user.userActive ? <button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>Desativar</button>: <button name={'Ativar'} icon={'✔️'} onClick={ (e) => handleUserActivation(e, user)}>Ativar</button>}</GridColumn> */}
               <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
               <GridColumn grid='0'>
-                <LinkToPage
+                <EditItem
                   pathname={"/cadastros/usuarios/alterar"}
                   description={"🖊️"}
                   payload={{
@@ -164,22 +183,8 @@ function UsuariosSistema() {
         </BodyGrid>
       ):
       (
-        <BodyCard>     
-          {(users.map (user =>(
-            <ContentCard>
-              <div className='cardHeader'>
-                <h3 className='titulo'>{user.userName}</h3>
-                <span className='subtitulo'>{user.userLoginName}</span>
-              </div>
-              <p className='paragrafo'>{user.userEmail}</p>
-              <OptionBox>               
-                <OptionsBoxItem name={'Desativar'} onClick={handleUserActivation}/>
-            </OptionBox>
-            </ContentCard>
-          )))}
-        </BodyCard>
-      )}
-      <LinkToPage
+        <BodyCard>
+          <AddNewItemCard
         pathname={"/cadastros/usuarios/novo"}
         description={"Novo usuário"}
         payload={{
@@ -190,11 +195,35 @@ function UsuariosSistema() {
             userLoginName: "",
             userEmail: "",
             userAvatarURL: "",
+            valid: false
           },
           title: "Novo usuário",
           title_full: "Criando novo usuário",
         }}
-      />
+      />   
+          {(users.map (user =>(
+            <ContentCard>
+              <div className='cardHeader'>
+                <h3 className='titulo'>{user.userName}</h3>
+                <span className='subtitulo'>{user.userLoginName}</span>
+              </div>
+              <p className='paragrafo'>{user.userEmail}</p>
+              <OptionBox>               
+                <OptionsBoxItem name={'Desativar'} onClick={handleUserActivation}/>
+                <EditItem
+                  pathname={"/cadastros/usuarios/alterar"}
+                  description={"Editar"}
+                  payload={{
+                    user,
+                    title: `Editando: ${user.userName}`,
+                    title_full: `Editando o usuário: ${user.userName}`
+                  }}
+                />
+            </OptionBox>
+            </ContentCard>
+          )))}
+        </BodyCard>
+      )}      
       <Footer/>
     </>
   )

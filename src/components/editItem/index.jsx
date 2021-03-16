@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Container } from './styles';
+import { StyledLink } from './styles';
 
-function LinkToPage({pathname, payload, description}) {
+function EditItem({pathname, payload, description}) {
 
-  return (
-  <Link
+  return (    
+  <StyledLink
     to={{
         pathname,
         state: {
@@ -14,11 +14,11 @@ function LinkToPage({pathname, payload, description}) {
         }
     }}
   >
-    <Container>
+    
         <span>{description}</span>
-    </Container>
-  </Link>
+    
+  </StyledLink>  
   )
 }
 
-export default LinkToPage;
+export default EditItem;

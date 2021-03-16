@@ -14,14 +14,11 @@ import api from '../../../../services/api';
 
 function NewUser(props) {
 
-    const { user, title, title_full } = props.location.state.payload;
-
-    /* useEffect(() => {
-        console.log(user, title, title_full);
-    },[]) */
+    const { user, title, title_full } = props.location.state.payload;    
 
     const history = useHistory();
 
+    const [operation, setOperation] = useState(!user.valid ? 'update' : 'create')
     const [data, setData] = useState({
         id: user.id || "",
         name: user.userName || "",
@@ -32,6 +29,10 @@ function NewUser(props) {
         password: "",
         avatarURL: user.userAvatarURL|| "",
     });
+
+    useEffect(() => {
+        console.log(operation);
+    },[])
 
     function validaSenha(password) {
         if (password != data.passToVerify) {
@@ -80,6 +81,19 @@ function NewUser(props) {
                 });
             }
         })
+    }
+
+    async function updateUser() {
+        /* await api.put('/user/update', {
+            id: data.id,
+            name: data.name,
+            surName: data.surName,
+            login: data.login,
+            email: data.email,
+            password: data.password,
+            avatarURL: data.avatarURL,
+        }) */
+        console.log("Chegou ", data);
     }
 
   return (
@@ -145,7 +159,7 @@ function NewUser(props) {
             </div>
             <div className={"flex-row"}>
             <SendFormBtn
-                onClick={() => createUser()}
+                onClick={operation === 'create' ? () => createUser() : () => updateUser()}
                 text={"Criar usuário"}
                 width={"30%"}    
             />
