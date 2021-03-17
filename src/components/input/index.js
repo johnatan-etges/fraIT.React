@@ -9,7 +9,7 @@ function Input({value, type, label, required, onChange, onFocus, onBlur, setRef,
 
   useEffect(() => {
     value ? setFocused(true) : setFocused(false)
-  },[])
+  },[value]) //pode dar pau
 
   const isValid = (valueToValidate) => {
     if (required && !valueToValidate) {
@@ -42,7 +42,6 @@ function Input({value, type, label, required, onChange, onFocus, onBlur, setRef,
       <input
         id={id}     
         type={type}
-        /* onChange={e => onChange(e.target.value)} */
         onChange={handleOnChange}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}

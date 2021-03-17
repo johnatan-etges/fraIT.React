@@ -1,9 +1,6 @@
 import styled from 'styled-components';
-import theme from 'styled-theming';
 
-export const Container = styled.div`
-
-  /* background-color: ${({theme}) => theme.mode == 'dark' ? theme.CARD_BACKGROUND : 'transparent'}; */
+export const Container = styled.div`  
   background-color: ${({theme}) => theme.CARD_BACKGROUND};
   opacity: ${({theme}) => theme.CARD_OPACITY};
 

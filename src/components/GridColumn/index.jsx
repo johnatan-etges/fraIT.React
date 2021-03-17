@@ -1,9 +1,8 @@
 import React from 'react';
-import { Children } from 'react';
 
 import { GColumn } from './styles';
 
-function GridColumn( {grid, ...props} ) {
+function GridColumn({ grid, ...props }) {
   return (
       <GColumn grid={grid}>
           {props.children}

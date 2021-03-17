@@ -3,7 +3,6 @@ import { bool } from 'prop-types';
 
 import { StyledSideBar } from './styles';
 import MenuItem from '../sideBarMenuItem';
-import Separator from '../separator';
 
 const Sidebar = ({open, menuItems, ...props}) => {
 
@@ -15,8 +14,8 @@ const Sidebar = ({open, menuItems, ...props}) => {
         {menuItems.map(menuItem => (
           (menuItem.linkName === 'Configurações') ?
             <>
-              <Separator/>
-              <MenuItem key={menuItem.id} {...menuItem} depth={0} depthStep={2}/>
+              <div className="separator"/>
+              <MenuItem key={menuItem.id} {...menuItem} depth={0} depthStep={2}/>              
             </>
           :
             <MenuItem key={menuItem.id} {...menuItem} depth={0} depthStep={2}/>

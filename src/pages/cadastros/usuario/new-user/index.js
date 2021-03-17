@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
@@ -9,6 +9,7 @@ import Header from '../../../../components/header';
 import Footer from '../../../../components/footer';
 import Input from '../../../../components/input';
 import SendFormBtn from '../../../../components/SendFormBtn';
+import GoBack from '../../../../components/go-back';
 
 import api from '../../../../services/api';
 
@@ -35,7 +36,7 @@ function NewUser(props) {
     });
 
     function validaSenha(password) {
-        if (password != data.passToVerify) {
+        if (password !== data.passToVerify) {
             toast.error("As senhas não conferem!",{
                 position: toast.POSITION_TOP_RIGHT,
             });
@@ -77,6 +78,7 @@ function NewUser(props) {
                     toast.error("Não foi possível cadastrar o usuário!", {
                         position: toast.POSITION_TOP_RIGHT,
                     });
+                    break;
                 default:
                     toast.error("Não foi possível cadastrar o usuário! Erro não identificado!", {
                         position: toast.POSITION_TOP_RIGHT,
@@ -111,7 +113,8 @@ function NewUser(props) {
                 case 406:
                     toast.error(`Não atualizado! Login: ${user.userLoginName}`, {
                         position: toast.POSITION_TOP_RIGHT,
-                    });                    
+                    });
+                    break;                   
                 default:
                     toast.error("Não foi possível cadastrar o usuário! Erro não identificado!", {
                         position: toast.POSITION_TOP_RIGHT,
@@ -124,6 +127,7 @@ function NewUser(props) {
     <>        
         <Header title={title} title_full={title_full}/>
         <BodyForm>
+            <GoBack/>
             <Input
                 id={"user_login"}
                 name={"user_login"}
@@ -191,11 +195,6 @@ function NewUser(props) {
                 onClick={editMode ? () => updateUser() : () => createUser()}
                 text={buttonTitle}
                 width={"30%"}    
-            />
-            <SendFormBtn
-                onClick={() => history.goBack()}
-                text={"Cancelar"}
-                width={"50%"}
             />
             </div>
         </BodyForm>

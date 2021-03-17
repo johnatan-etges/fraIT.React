@@ -1,5 +1,3 @@
-import theme from 'styled-theming';
-
 //Card view mode colors on dark mode
 
 export const DARK_HEADER_BACKGROUND = "#31323B";

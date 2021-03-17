@@ -6,6 +6,7 @@ import Signin from '../pages/SignIn';
 import Dashboard from '../pages/Dashboard';
 import UsuariosSistema from '../pages/cadastros/usuario';
 import NewUser from '../pages/cadastros/usuario/new-user';
+import UserDetails from '../pages/cadastros/usuario/user-details';
 import SecretariasLocais from '../pages/cadastros/secretarias-locais';
 
 function routes() {  
@@ -17,6 +18,7 @@ function routes() {
         <Route path="/cadastros/usuarios" exact component={UsuariosSistema} isPrivate/>
         <Route path="/cadastros/usuarios/novo" exact component={NewUser} isPrivate/>
         <Route path="/cadastros/usuarios/alterar" exact component={NewUser} isPrivate/>
+        <Route path="/cadastros/usuarios/detalhes" exact component={UserDetails} isPrivate/>
         <Route path="/cadastros/secretarias-locais" component={SecretariasLocais} isPrivate/>
       </Switch>
     </BrowserRouter>      

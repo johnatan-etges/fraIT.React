@@ -8,7 +8,7 @@ const MenuItem = ({open, boder, target, icon, linkName, menuItem, depth, depthSt
 
   const isHidden = open ? true : false;
   const tabIndex = isHidden ? 0 : -1;
-  const showPadding = depth * depthStep;
+  const showPadding = depth * depthStep;  
 
   //Accordion
   const [setActive, setActiveState] = useState(false);

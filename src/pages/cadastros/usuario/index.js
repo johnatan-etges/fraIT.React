@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Link } from "react-router-dom";
-
 import api from '../../../services/api';
 
 import Header from '../../../components/header';
@@ -21,16 +19,11 @@ import AddNewItemCard from '../../../components/addNewItemCard';
 import EditItem from '../../../components/editItem';
 
 function UsuariosSistema() {
-   
-    const initialState={
-      loading: false,
-      updating: false,
-    };
+    
 
     const [users, setUsers] = useState([]);
-    const [data, setData] = useState(initialState);
-    const [usersPesquisa, setUsersPesquisa] = useState([]);
-    const [updatingUser, setUpdatingUser] = useState(false);
+    /*const [data, setData] = useState(initialState);
+    const [usersPesquisa, setUsersPesquisa] = useState([]);*/
   
     async function loadUsers() {
       const response = await api.get('/users/index');      
@@ -96,8 +89,7 @@ function UsuariosSistema() {
             <GridColumn grid='1'>Usuário</GridColumn>
             <GridColumn grid='2.5'>E-mail</GridColumn>
             <GridColumn grid='0.6'>Nome</GridColumn>
-            <GridColumn grid='1'>Ativo?</GridColumn>
-            <GridColumn grid='0.5'>↕️</GridColumn>
+            <GridColumn grid='0.5'><span role="img" aria-label="Ativar ou Desativar">↕️</span></GridColumn>
             <GridColumn grid='0'>🖊</GridColumn>
           </GridRow>
           {(users.map (user => 
@@ -105,9 +97,7 @@ function UsuariosSistema() {
             <GridRow>
               <GridColumn grid='1'>{user.userLoginName}</GridColumn>
               <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
-              <GridColumn grid='0.6'>{user.userName}</GridColumn>
-              <GridColumn grid='1'>{user.userActive ? 'Ativo' : 'Inativo'}</GridColumn>
-              {/* <GridColumn grid='0.5'>{user.userActive ? <button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>Desativar</button>: <button name={'Ativar'} icon={'✔️'} onClick={ (e) => handleUserActivation(e, user)}>Ativar</button>}</GridColumn> */}
+              <GridColumn grid='0.6'>{user.userName}</GridColumn>              
               <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
               <GridColumn grid='0'>
                 <EditItem
@@ -139,7 +129,14 @@ function UsuariosSistema() {
                 <span className='subtitulo'>{user.userLoginName}</span>
               </div>
               <p className='paragrafo'>{user.userEmail}</p>
-              <OptionBox>               
+              <OptionBox>
+                <EditItem 
+                  pathname={"/cadastros/usuarios/detalhes"}
+                  description={"Detalhes"}
+                  payload={{
+                    user,
+                  }}
+                />              
                 <OptionsBoxItem name={'Desativar'} onClick={handleUserActivation}/>
                 <EditItem
                   pathname={"/cadastros/usuarios/alterar"}

@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${({theme}) => theme.contrast};
-  font-size: 1.5rem;    
-  padding: 1.1rem;  
+  font-size: 1.5rem;
+    
+  margin-left: 1.1rem;
 
   &:focus, &:hover, &:visited, *:link, &:active {
     text-decoration: none;

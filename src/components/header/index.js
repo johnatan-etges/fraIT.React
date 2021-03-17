@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { Container } from './styles';
-import NavBar from '../navBar';
 import NavOptions from '../navOptions';
 import Sidebar from '../../components/sidebar';
 import Burger from '../../components/burger';
@@ -62,14 +61,7 @@ function Header({title, title_full}) {
           target: '/cadastros/usuarios',
           open: open,
           icon: '👥',
-          linkName: 'Usuários',
-          menuItem: [
-            {
-              target: '/cadastros/usuarios/novo',
-              open: open,
-              linkName: 'Usuários',
-            }
-          ]
+          linkName: 'Usuários',          
         },
         {
           target: '/cadastros/secretarias-locais',

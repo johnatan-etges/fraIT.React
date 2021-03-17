@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+import React from 'react';
 import { StyledLink } from './styles';
 
 function EditItem({pathname, payload, description}) {
-
   return (    
   <StyledLink
     to={{
@@ -13,10 +10,8 @@ function EditItem({pathname, payload, description}) {
             payload
         }
     }}
-  >
-    
-        <span>{description}</span>
-    
+  >    
+        <span>{description}</span>    
   </StyledLink>  
   )
 }
