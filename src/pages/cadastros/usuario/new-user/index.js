@@ -14,29 +14,31 @@ import api from '../../../../services/api';
 
 function NewUser(props) {
 
-    const { user, title, title_full } = props.location.state.payload;    
+    const { user, valid } = props.location.state.payload;    
 
     const history = useHistory();
 
-    const [operation, setOperation] = useState(!user.valid ? 'update' : 'create')
+    const editMode = valid ? true : false
+    const buttonTitle = editMode ? "Editar usuário" : "Novo usuário"
+    const title_full = editMode ? `Editando usuário: ${user.userName}` : "Criando novo usuário"
+    const title = editMode ? `Editando ${user.userName}` : "Novo usuário"
+
     const [data, setData] = useState({
-        id: user.id || "",
-        name: user.userName || "",
-        surName: user.userSurName|| "",
-        login: user.userLoginName || "",
-        email: user.userEmail|| "",
+        id: valid ? user.id : "",
+        name: valid ? user.userName : "",
+        surName: valid ? user.userSurName : "",
+        login: valid ? user.userLoginName : "",
+        email: valid ? user.userEmail : "",
         passToVerify: "",
         password: "",
-        avatarURL: user.userAvatarURL|| "",
+        avatarURL: valid ? user.userAvatarURL : "",
     });
-
-    useEffect(() => {
-        console.log(operation);
-    },[])
 
     function validaSenha(password) {
         if (password != data.passToVerify) {
-            console.log("As senhas não conferem!");
+            toast.error("As senhas não conferem!",{
+                position: toast.POSITION_TOP_RIGHT,
+            });
             return
         }
         setData({...data, password});
@@ -61,30 +63,30 @@ function NewUser(props) {
         })
         .catch (err => {                
             switch (err.response.status) {
-            case 600:
-                toast.error("Nome de usuário e/ou e-mail já cadastrado(s)!", {
-                    position: toast.POSITION_TOP_RIGHT,
-                });
-                break;
-            case 406:
-                toast.error("Os campos 'nome', 'e-mail', 'login' e 'senha' são obrigatórios!", {
-                    position: toast.POSITION_TOP_RIGHT,
-                });
-                break;
-            case 500:
-                toast.error("Não foi possível cadastrar o usuário!", {
-                    position: toast.POSITION_TOP_RIGHT,
-                });
-            default:
-                toast.error("Não foi possível cadastrar o usuário! Erro não identificado!", {
-                    position: toast.POSITION_TOP_RIGHT,
-                });
+                case 600:
+                    toast.error("Nome de usuário e/ou e-mail já cadastrado(s)!", {
+                        position: toast.POSITION_TOP_RIGHT,
+                    });
+                    break;
+                case 406:
+                    toast.error("Os campos 'nome', 'e-mail', 'login' e 'senha' são obrigatórios!", {
+                        position: toast.POSITION_TOP_RIGHT,
+                    });
+                    break;
+                case 500:
+                    toast.error("Não foi possível cadastrar o usuário!", {
+                        position: toast.POSITION_TOP_RIGHT,
+                    });
+                default:
+                    toast.error("Não foi possível cadastrar o usuário! Erro não identificado!", {
+                        position: toast.POSITION_TOP_RIGHT,
+                    });
             }
         })
     }
 
     async function updateUser() {
-        /* await api.put('/user/update', {
+        await api.put('/users/update', {
             id: data.id,
             name: data.name,
             surName: data.surName,
@@ -92,8 +94,30 @@ function NewUser(props) {
             email: data.email,
             password: data.password,
             avatarURL: data.avatarURL,
-        }) */
-        console.log("Chegou ", data);
+        })
+        .then(response => {
+            toast.success("Usuário atualizado com sucesso!", {
+                position: toast.POSITION_TOP_RIGHT,
+            });
+            history.push("/cadastros/usuarios")
+        })
+        .catch(err => {
+            switch (err.response.status) {
+                case 501:
+                    toast.error(`Não atualizado! Login: ${user.userLoginName}`, {
+                        position: toast.POSITION_TOP_RIGHT,
+                    });
+                    break;
+                case 406:
+                    toast.error(`Não atualizado! Login: ${user.userLoginName}`, {
+                        position: toast.POSITION_TOP_RIGHT,
+                    });                    
+                default:
+                    toast.error("Não foi possível cadastrar o usuário! Erro não identificado!", {
+                        position: toast.POSITION_TOP_RIGHT,
+                    });
+            }
+        });
     }
 
   return (
@@ -107,6 +131,7 @@ function NewUser(props) {
                 label={"Nome de usuário"}
                 value={data.login}
                 onBlur={value => setData({...data, login: value})}
+                required
             />
             <div className="flex-row">
             <Input
@@ -117,6 +142,7 @@ function NewUser(props) {
                 width={"60%"}
                 value={data.name}
                 onBlur={value => setData({...data, name: value})}
+                required
             />
             <Input
                 id={"user_surName"}
@@ -138,6 +164,7 @@ function NewUser(props) {
                 /* onChange={value => setData({...data, email: value})} */
                 onChange={value => console.log(value)}
                 onBlur={value => setData({...data, email: value})}
+                required
             />
             <div className="flex-row">
             <Input
@@ -147,6 +174,7 @@ function NewUser(props) {
                 label={"Senha"}
                 width={"50%"}                
                 onBlur={value => setData({...data, passToVerify: value})}
+                required
             />
             <Input
                 id={"verify-passwd"}
@@ -155,12 +183,13 @@ function NewUser(props) {
                 label={"Repita a senha"}
                 width={"50%"}
                 onBlur={value => validaSenha(value)}
+                required
             />
             </div>
             <div className={"flex-row"}>
             <SendFormBtn
-                onClick={operation === 'create' ? () => createUser() : () => updateUser()}
-                text={"Criar usuário"}
+                onClick={editMode ? () => updateUser() : () => createUser()}
+                text={buttonTitle}
                 width={"30%"}    
             />
             <SendFormBtn

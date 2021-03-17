@@ -53,63 +53,17 @@ function UsuariosSistema() {
         active: user.userActive,
       });
 
-      (response) ? loadUsers() : toast.error("Não foi possível atualizar", {position: toast.POSITION.TOP_RIGHT});
+      response ? loadUsers() : toast.error("Não foi possível atualizar", {position: toast.POSITION.TOP_RIGHT});
     }
-
-    /* async function handleLoadUpdateForm(user) {
-      setData({
-        ...data,        
-        updating: true,
-      });
-      setUpdatingUser(user);
-    } */
-
-    /* async function handleUserUpdate(user) {         
-      try {
-        await api.put('/users/update',{
-          id: user.id,
-          name: user.name,
-          surName: user.surName,
-          login: user.login,
-          email: user.email,
-          avatarURL: user.avatarURL,
-        });
-        setData({
-          ...data,
-          updating: false,
-          loading: false,
-        });        
-        toast.success("Usuário atualizado com sucesso!",{
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setUpdatingUser(null);
-        loadUsers();
-
-      } catch (error) {
-        toast.error("Não foi possível atualizar o usuário!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setUpdatingUser(null);
-      }
-    } */
-
-    /* function handleCancelUpdate() {
-      setData({
-        ...data,
-        updating: false,
-        loading: false,
-      });
-      setUpdatingUser(null);     
-    } */
-
-    async function handleSearch(searchTerm) {
+   
+    /* async function handleSearch(searchTerm) {
       if(searchTerm) {
         const response = await api.get(`/users/search?searchTerm=${searchTerm}`);
         (response.data.length > 0) ? setUsersPesquisa(response.data) : toast.error("A busca não retornou resultados!", {position: toast.POSITION.TOP_RIGHT})           
       }
-    }
+    } */
 
-    async function handlePassReset(user) {
+    /* async function handlePassReset(user) {
       console.log(user);
       try {
         const response = await api.put('/users/passUpdate',{
@@ -123,7 +77,7 @@ function UsuariosSistema() {
       } catch (err) {
         toast.error("Senha não alterada!", {position: toast.POSITION.TOP_RIGHT})
       }
-    }
+    } */
     
   return (
     <>
@@ -135,24 +89,13 @@ function UsuariosSistema() {
         pathname={"/cadastros/usuarios/novo"}
         description={"Novo usuário"}
         payload={{
-          user: {
-            id: "",
-            userName: "",
-            userSurName: "",
-            userLoginName: "",
-            userEmail: "",
-            userAvatarURL: "",
-            valid: false
-          },
-          title: "Novo usuário",
-          title_full: "Criando novo usuário",
+          valid: false
         }}
       />
           <GridRow header={true}>
             <GridColumn grid='1'>Usuário</GridColumn>
             <GridColumn grid='2.5'>E-mail</GridColumn>
             <GridColumn grid='0.6'>Nome</GridColumn>
-            {/* <GridColumn grid='1'>Sobrenome</GridColumn> */}
             <GridColumn grid='1'>Ativo?</GridColumn>
             <GridColumn grid='0.5'>↕️</GridColumn>
             <GridColumn grid='0'>🖊</GridColumn>
@@ -163,7 +106,6 @@ function UsuariosSistema() {
               <GridColumn grid='1'>{user.userLoginName}</GridColumn>
               <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
               <GridColumn grid='0.6'>{user.userName}</GridColumn>
-              {/* <GridColumn grid='1'>{user.userSurName}</GridColumn> */}      
               <GridColumn grid='1'>{user.userActive ? 'Ativo' : 'Inativo'}</GridColumn>
               {/* <GridColumn grid='0.5'>{user.userActive ? <button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>Desativar</button>: <button name={'Ativar'} icon={'✔️'} onClick={ (e) => handleUserActivation(e, user)}>Ativar</button>}</GridColumn> */}
               <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
@@ -173,8 +115,7 @@ function UsuariosSistema() {
                   description={"🖊️"}
                   payload={{
                     user,
-                    title: `Editando: ${user.userName}`,
-                    title_full: `Editando o usuário: ${user.userName}`
+                    valid: true
                   }}
                 />
               </GridColumn>              
@@ -188,17 +129,7 @@ function UsuariosSistema() {
         pathname={"/cadastros/usuarios/novo"}
         description={"Novo usuário"}
         payload={{
-          user: {
-            id: "",
-            userName: "",
-            userSurName: "",
-            userLoginName: "",
-            userEmail: "",
-            userAvatarURL: "",
-            valid: false
-          },
-          title: "Novo usuário",
-          title_full: "Criando novo usuário",
+          valid: false
         }}
       />   
           {(users.map (user =>(
@@ -215,8 +146,7 @@ function UsuariosSistema() {
                   description={"Editar"}
                   payload={{
                     user,
-                    title: `Editando: ${user.userName}`,
-                    title_full: `Editando o usuário: ${user.userName}`
+                    valid: true
                   }}
                 />
             </OptionBox>

@@ -14,8 +14,7 @@ export const Container = styled.div`
     margin-right: 1rem;
   }
 
-  & > input {
-    border: 1px solid ${({theme}) => theme.contrast};
+  & > input {    
     background-color: transparent;
     outline: none;
     padding: .75rem 1.5rem .75rem 1.5rem;
@@ -26,6 +25,12 @@ export const Container = styled.div`
     z-index: 500;
     width: 100%;
     border-radius: 10px;
+
+    border: 1px solid ${({theme}) => theme.contrast};
+    //makes border red if required no attended
+    ${props => !props.valid && `
+      border: 2px solid red;
+    `}
 
     ::placeholder {
       color: ${({theme}) => theme.contrast};
