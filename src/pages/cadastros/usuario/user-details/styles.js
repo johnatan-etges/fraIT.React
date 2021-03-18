@@ -28,7 +28,7 @@ export const Container = styled.div`
   .card {
       width: 100%;
       height: auto;
-      max-height: 150px;
+      max-height: 250px;
       
       display: flex;
       flex-direction: column;
@@ -36,7 +36,8 @@ export const Container = styled.div`
       border-bottom: 1px solid white;      
 
       .card-item-box {
-        width: 100%;
+        width: auto;
+        max-width: 40%;
         display: flex;
         flex-direction: column;
 
@@ -51,7 +52,7 @@ export const Container = styled.div`
       }
 
       .card-header-title {        
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-weight: 500;
       }
 
@@ -65,5 +66,10 @@ export const Container = styled.div`
         font-weight: 400;
       }
       
+    }
+
+    .box-row {
+      display: flex;
+      flex-wrap: wrap;
     }
 `;
