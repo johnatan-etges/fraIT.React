@@ -8,7 +8,7 @@ function GoBack() {
     const history = useHistory();
     return (
         <Container> 
-            <span role={"img"} aria-label={"Voltar"} onClick={() => history.goBack()}>⬅️</span>
+            <span role={"img"} aria-label={"Voltar"} onClick={() => history.goBack()}>⬅️ Voltar</span>
         </Container>
     );
 }

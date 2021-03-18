@@ -17,10 +17,23 @@ function UserDetails(props) {
         <BodyCard>
             <Container>
                 <GoBack/>
-                <div className={"info-header"}>
-                    <span className={"header-title"}>{user.userName}</span>
-                    <span className={"header-subtitle"}>{user.userLoginName}</span>
-                </div>                
+                <div className={"card-section-title"}>
+                    <span>Informações básicas</span>
+                </div>
+                <div className={"card"}>
+                    <div className={"card-item-box"}>
+                        <span className={"card-item-box-label"}>Nome</span>
+                        <span className={"card-header-title"}>{user.userName}</span>
+                    </div>
+                    <div className={"card-item-box"}>
+                        <span className={"card-item-box-label"}>Nome de usuário</span>
+                        <span  className={"card-header-subtitle"}>{user.userLoginName}</span>
+                    </div>
+                </div>
+                <div className={"card"}>
+                    <span className={"card-body-text-item"}>{user.userEmail}</span>
+                    <span className={"card-body-text-item"}></span>
+                </div>          
                 
             </Container>
         </BodyCard>
