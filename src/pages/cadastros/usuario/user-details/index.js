@@ -4,6 +4,7 @@ import Header from '../../../../components/header';
 import BodyCard from '../../../../components/BodyCard';
 import Footer from '../../../../components/footer';
 import GoBack from '../../../../components/go-back';
+import EditItem from '../../../../components/editItem';
 
 import { Container } from './styles';
 
@@ -51,7 +52,7 @@ function UserDetails(props) {
                     <div className="card-section-title">
                         <span>Permissões do usuário no Sistema</span>
                     </div>
-                    <div className={"box-row"}>
+                    <div className={"card-box-row"}>
                     <div className="card-item-box">
                         <span className="card-item-box-label">Tela</span>
                         <span className="card-body-text-item">Listagem de usuários</span>
@@ -73,6 +74,17 @@ function UserDetails(props) {
                         <span className="card-body-text-item">Dashboard</span>
                     </div>
                     </div>
+                </div>
+                <div className={"footer"}>
+                    <EditItem
+                        pathname={"/cadastros/usuarios/alterar"}
+                        description={"Editar usuário"}
+                        payload={{
+                            user,
+                            valid: true
+                        }}
+                        
+                    />
                 </div>      
                 
             </Container>

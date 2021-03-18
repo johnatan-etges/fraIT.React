@@ -90,7 +90,8 @@ function UsuariosSistema() {
             <GridColumn grid='2.5'>E-mail</GridColumn>
             <GridColumn grid='0.6'>Nome</GridColumn>
             <GridColumn grid='0.5'><span role="img" aria-label="Ativar ou Desativar">↕️</span></GridColumn>
-            <GridColumn grid='0'>🖊</GridColumn>
+            <GridColumn grid='0.5'>🖊</GridColumn>
+            <GridColumn grid='0'>Detalhes</GridColumn>
           </GridRow>
           {(users.map (user => 
           (
@@ -99,7 +100,7 @@ function UsuariosSistema() {
               <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
               <GridColumn grid='0.6'>{user.userName}</GridColumn>              
               <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
-              <GridColumn grid='0'>
+              <GridColumn grid='0.5'>
                 <EditItem
                   pathname={"/cadastros/usuarios/alterar"}
                   description={"🖊️"}
@@ -108,7 +109,16 @@ function UsuariosSistema() {
                     valid: true
                   }}
                 />
-              </GridColumn>              
+              </GridColumn>
+              <GridColumn grid='0'>
+              <EditItem 
+                  pathname={"/cadastros/usuarios/detalhes"}
+                  description={"Detalhes"}
+                  payload={{
+                    user,
+                  }}
+                />
+              </GridColumn>
             </GridRow>
           )))}
         </BodyGrid>
@@ -137,7 +147,7 @@ function UsuariosSistema() {
                     user,
                   }}
                 />              
-                <OptionsBoxItem name={'Desativar'} onClick={handleUserActivation}/>
+                <OptionsBoxItem name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}/>
                 <EditItem
                   pathname={"/cadastros/usuarios/alterar"}
                   description={"Editar"}

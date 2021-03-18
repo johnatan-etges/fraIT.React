@@ -64,12 +64,23 @@ export const Container = styled.div`
       .card-body-text-item {
         font-size: 1rem;
         font-weight: 400;
+      }   
+
+      .card-box-row {
+        display: flex;
+        flex-wrap: wrap;
       }
-      
+
     }
 
-    .box-row {
+    .footer {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+
+      margin-top: 20px;
     }
 `;
