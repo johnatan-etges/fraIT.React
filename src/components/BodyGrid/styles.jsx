@@ -12,7 +12,7 @@ export const Container = styled.div`
   box-sizing: border-box;
   overflow: hidden;
 
-  padding: 1vh 30px;
+  padding: 30px;
 
   @media (max-width: ${({theme}) => theme.narrow}) {
     font-size: 1rem;
