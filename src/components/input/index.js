@@ -1,33 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Container } from './styles';
 
-function Input({type,label, onChange, onFocus, onBlur, setRef, spellCheck, width, ...props}) {
+function Input({value, type, label, required, onChange, onFocus, onBlur, setRef, spellCheck, width, id, ...props}) {
 
   const [focused, setFocused] = useState(false);
+  const [valid, setValid] = useState(true);
 
-  function handleOnFocus() {    
+  useEffect(() => {
+    value ? setFocused(true) : setFocused(false)
+  },[value]) //pode dar pau
+
+  const isValid = (valueToValidate) => {
+    if (required && !valueToValidate) {
+      setValid(false)
+    } else if ((required && valueToValidate) || (!required)) {
+      setValid(true)
+    }
+  }
+
+  function handleOnFocus() {
       setFocused(true);
-      onFocus(); 
+      onFocus && onFocus(); 
   }
 
   function handleOnBlur(e) {
     e.target.value ? setFocused(true) : setFocused(false);
-    onBlur();
+    isValid(e.target.value);
+    onBlur && onBlur(e.target.value);
+  }
+
+  function handleOnChange(e) {
+    onChange && onChange(e.target.value);
   }
 
   const renderLabel = () => label && <label>{ label }</label>
   
   return (
-    <Container focused={focused} width={width}>
+    <Container focused={focused} width={width} valid={valid}>
       {renderLabel()}
-      <input        
+      <input
+        id={id}     
         type={type}
-        onChange={e => onChange(e.target.value)}
+        onChange={handleOnChange}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
         ref={ref => setRef(ref)}
         spellCheck={spellCheck}
+        defaultValue={value}
         {...props}
       />
     </Container>
@@ -37,11 +57,9 @@ function Input({type,label, onChange, onFocus, onBlur, setRef, spellCheck, width
 Input.defaultProps = {
   type: "text",
   label: "",
-  width: '100%',
   spellCheck: true,
-  onFocus: () => {},
-  onBlur: () => {},
   setRef: () => {},
+  value:""
 }
 
 export default Input;

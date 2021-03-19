@@ -7,7 +7,12 @@ import { Container } from './styles';
 function Body(props) {
   return (
       <Container>
-        <PerfectScrollBar>
+        <PerfectScrollBar
+          options={{
+            wheelSpeed:2,
+          }
+          }
+        >
         {props.children}
       </PerfectScrollBar>
       </Container> 

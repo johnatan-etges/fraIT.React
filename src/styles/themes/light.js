@@ -1,5 +1,3 @@
-import theme from 'styled-theming';
-
 //Card view mode colors on light mode
 
 export const LIGHT_HEADER_BACKGROUND = "#DEE4E7";

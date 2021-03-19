@@ -1,6 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { primary, secundary, contrast, special, shadow, sizes, hover, logoIT} from '../styles/themes';
 
 const ViewToggleContext = createContext({});
 

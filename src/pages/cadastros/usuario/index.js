@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,18 +14,16 @@ import OptionBox from '../../../components/optionsBox';
 import OptionsBoxItem from '../../../components/optionsBoxItem';
 import GridColumn from '../../../components/GridColumn';
 import GridRow from '../../../components/GridRow';
+import AddNewItemGrid from '../../../components/addNewItemGrid';
+import AddNewItemCard from '../../../components/addNewItemCard';
+import EditItem from '../../../components/editItem';
 
-function CadastroUsuario() {
-   
-    const initialState={
-      loading: false,
-      updating: false,
-    };
+function UsuariosSistema() {
+    
 
     const [users, setUsers] = useState([]);
-    const [data, setData] = useState(initialState);
-    const [usersPesquisa, setUsersPesquisa] = useState([]);
-    const [updatingUser, setUpdatingUser] = useState(false);
+    /*const [data, setData] = useState(initialState);
+    const [usersPesquisa, setUsersPesquisa] = useState([]);*/
   
     async function loadUsers() {
       const response = await api.get('/users/index');      
@@ -33,68 +32,7 @@ function CadastroUsuario() {
 
     useEffect(() => {
       loadUsers();
-    },[]);    
-
-    async function handleAddUser(user) {      
-      /* setData({
-        ...data,
-        loading: true,
-      });
-
-      try {
-        const response = await api.post('/users/signup', {
-          name: user.name,
-          surName: user.surName,
-          login: user.login,
-          email: user.email,
-          password: user.password,
-          avatarURL: user.avatarURL,
-        });        
-
-        if (response) {
-          toast.success("Usuário criado com sucesso!",{
-            position: toast.POSITION.TOP_RIGHT,
-          });
-        }
-
-        setUsers([
-          ...users,
-          {         
-          id: response.data.user.id,
-          userName: response.data.user.userName,
-          userSurName: response.data.user.userSurName,
-          userLoginName: response.data.user.userLoginName,
-          userEmail: response.data.user.userEmail,
-          userActive: response.data.user.userActive,         
-          }
-        ]);
-
-        setData({
-          ...data,
-          loading: false,
-        });
-
-      } catch (error) {
-
-        if (error.response.status === 400) {
-          toast.error("Nome de usuário e/ou senha já existe(m).",{
-            position: toast.POSITION.TOP_RIGHT,
-          })
-        }
-        if (error.response.status === 406) {
-          toast.error("Há campos não preenchidos, favor verificar!", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-        }
-
-        setData({
-          ...data,
-          loading: false,
-        });
-      }      */
-
-      console.log('ok');
-    };
+    },[]);
 
     async function handleUserActivation(e, user) {
 
@@ -108,65 +46,17 @@ function CadastroUsuario() {
         active: user.userActive,
       });
 
-      (response) ? loadUsers() : toast.error("Não foi possível atualizar", {position: toast.POSITION.TOP_RIGHT});
-
-      //console.log(user);
+      response ? loadUsers() : toast.error("Não foi possível atualizar", {position: toast.POSITION.TOP_RIGHT});
     }
-
-    async function handleLoadUpdateForm(user) {
-      setData({
-        ...data,        
-        updating: true,
-      });
-      setUpdatingUser(user);
-    }
-
-    async function handleUserUpdate(user) {         
-      try {
-        await api.put('/users/update',{
-          id: user.id,
-          name: user.name,
-          surName: user.surName,
-          login: user.login,
-          email: user.email,
-          avatarURL: user.avatarURL,
-        });
-        setData({
-          ...data,
-          updating: false,
-          loading: false,
-        });        
-        toast.success("Usuário atualizado com sucesso!",{
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setUpdatingUser(null);
-        loadUsers();
-
-      } catch (error) {
-        toast.error("Não foi possível atualizar o usuário!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        setUpdatingUser(null);
-      }
-    }
-
-    function handleCancelUpdate() {
-      setData({
-        ...data,
-        updating: false,
-        loading: false,
-      });
-      setUpdatingUser(null);     
-    }
-
-    async function handleSearch(searchTerm) {
+   
+    /* async function handleSearch(searchTerm) {
       if(searchTerm) {
         const response = await api.get(`/users/search?searchTerm=${searchTerm}`);
         (response.data.length > 0) ? setUsersPesquisa(response.data) : toast.error("A busca não retornou resultados!", {position: toast.POSITION.TOP_RIGHT})           
       }
-    }
+    } */
 
-    async function handlePassReset(user) {
+    /* async function handlePassReset(user) {
       console.log(user);
       try {
         const response = await api.put('/users/passUpdate',{
@@ -180,60 +70,99 @@ function CadastroUsuario() {
       } catch (err) {
         toast.error("Senha não alterada!", {position: toast.POSITION.TOP_RIGHT})
       }
-    }
+    } */
     
   return (
     <>
-      <Header title="Usuários" title_full="Usuários cadastrados no sistema"/>      
-           
-          {localStorage.getItem('@fraIT/viewMode') === 'grid' ? (
-            <BodyGrid>
-              <GridRow header={true}>
-                <GridColumn grid='1'>Usuário</GridColumn>
-                <GridColumn grid='2.5'>E-mail</GridColumn>
-                <GridColumn grid='0.6'>Nome</GridColumn>
-                {/* <GridColumn grid='1'>Sobrenome</GridColumn> */}
-                <GridColumn grid='1'>Ativo?</GridColumn>
-                <GridColumn grid='0.5'>↕️</GridColumn>
-                <GridColumn grid='0'>🖊</GridColumn>
-              </GridRow>
-              {(users.map (user => (
-                <GridRow>
-                  {(updatingUser) ? (
-                    <input type='text' value={user.userName}/>
-                  ):(
-                    <>
-                  <GridColumn grid='1'>{user.userLoginName}</GridColumn>
-                  <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
-                  <GridColumn grid='0.6'>{user.userName}</GridColumn>
-                  {/* <GridColumn grid='1'>{user.userSurName}</GridColumn> */}      
-                  <GridColumn grid='1'>{user.userActive ? 'Ativo' : 'Inativo'}</GridColumn>
-                  {/* <GridColumn grid='0.5'>{user.userActive ? <button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>Desativar</button>: <button name={'Ativar'} icon={'✔️'} onClick={ (e) => handleUserActivation(e, user)}>Ativar</button>}</GridColumn> */}
-                  <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
-                  <GridColumn grid='0'>🖊️</GridColumn>
-                  </>
-                  )}
-                </GridRow>
-              )))}
-            </BodyGrid>
-          ):(
-            <BodyCard>     
-              {(users.map (user =>(
-                <ContentCard>
-                  <div className='cardHeader'>
-                    <h3 className='titulo'>{user.userName}</h3>
-                    <span className='subtitulo'>{user.userLoginName}</span>
-                  </div>
-                  <p className='paragrafo'>{user.userEmail}</p>
-                  <OptionBox>               
-                    <OptionsBoxItem name={'Desativar'} onClick={handleUserActivation}/>
-                </OptionBox>
-                </ContentCard>
-              )))}
-            </BodyCard>
-          )}
+      <Header title="Usuários" title_full="Usuários cadastrados no sistema"/>
+      {localStorage.getItem('@fraIT/viewMode') === 'grid' ? 
+      (
+        <BodyGrid>
+          <AddNewItemGrid
+        pathname={"/cadastros/usuarios/novo"}
+        description={"Novo usuário"}
+        payload={{
+          valid: false
+        }}
+      />
+          <GridRow header={true}>
+            <GridColumn grid='1'>Usuário</GridColumn>
+            <GridColumn grid='2.5'>E-mail</GridColumn>
+            <GridColumn grid='0.6'>Nome</GridColumn>
+            <GridColumn grid='0.5'><span role="img" aria-label="Ativar ou Desativar">↕️</span></GridColumn>
+            <GridColumn grid='0.5'>🖊</GridColumn>
+            <GridColumn grid='0'>Detalhes</GridColumn>
+          </GridRow>
+          {(users.map (user => 
+          (
+            <GridRow>
+              <GridColumn grid='1'>{user.userLoginName}</GridColumn>
+              <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
+              <GridColumn grid='0.6'>{user.userName}</GridColumn>              
+              <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
+              <GridColumn grid='0.5'>
+                <EditItem
+                  pathname={"/cadastros/usuarios/alterar"}
+                  description={"🖊️"}
+                  payload={{
+                    user,
+                    valid: true
+                  }}
+                />
+              </GridColumn>
+              <GridColumn grid='0'>
+              <EditItem 
+                  pathname={"/cadastros/usuarios/detalhes"}
+                  description={"Detalhes"}
+                  payload={{
+                    user,
+                  }}
+                />
+              </GridColumn>
+            </GridRow>
+          )))}
+        </BodyGrid>
+      ):
+      (
+        <BodyCard>
+          <AddNewItemCard
+        pathname={"/cadastros/usuarios/novo"}
+        description={"Novo usuário"}
+        payload={{
+          valid: false
+        }}
+      />   
+          {(users.map (user =>(
+            <ContentCard>
+              <div className='cardHeader'>
+                <h3 className='titulo'>{user.userName}</h3>
+                <span className='subtitulo'>{user.userLoginName}</span>
+              </div>
+              <p className='paragrafo'>{user.userEmail}</p>
+              <OptionBox>
+                <EditItem 
+                  pathname={"/cadastros/usuarios/detalhes"}
+                  description={"Detalhes"}
+                  payload={{
+                    user,
+                  }}
+                />              
+                <OptionsBoxItem name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}/>
+                <EditItem
+                  pathname={"/cadastros/usuarios/alterar"}
+                  description={"Editar"}
+                  payload={{
+                    user,
+                    valid: true
+                  }}
+                />
+            </OptionBox>
+            </ContentCard>
+          )))}
+        </BodyCard>
+      )}      
       <Footer/>
     </>
   )
 }
-export default CadastroUsuario;
+export default UsuariosSistema;

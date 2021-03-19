@@ -17,6 +17,11 @@ export const StyledSideBar = styled.nav`
   left: 0;
   transition: transform 0.3s ease-in-out;
 
+  .separator {
+    height: 1px;
+    border: 1px solid ${({theme, open}) => (open) ? theme.primaryLight : theme.primaryDark};
+  }
+
   @media (max-width: ${({theme}) => theme.mobile}) {
     width: 100%;
   }

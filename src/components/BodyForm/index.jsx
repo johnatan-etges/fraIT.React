@@ -6,11 +6,13 @@ import { Container } from './styles';
 
 function Body(props) {
   return (
-    <Container>
-      <PerfectScrollBar>
+      <Container>
+        <PerfectScrollBar
+          style={{width: '100%'}}
+        >
         {props.children}
       </PerfectScrollBar>
-    </Container> 
+      </Container> 
   );
 }
 

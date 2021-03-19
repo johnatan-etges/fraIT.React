@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { Container } from './styles';
-import NavBar from '../navBar';
 import NavOptions from '../navOptions';
 import Sidebar from '../../components/sidebar';
 import Burger from '../../components/burger';
@@ -59,16 +58,22 @@ function Header({title, title_full}) {
       linkName: 'Cadastros',
       menuItem: [
         {
-          target: '/cadastros/usuario',
+          target: '/cadastros/usuarios',
           open: open,
           icon: '👥',
-          linkName: 'Usuários',
+          linkName: 'Usuários',          
         },
         {
-          target: '/cadastros/secretarias-locais',
+          target: '/cadastros/entidades',
           open: open,
           icon: '🏛️',
-          linkName: 'Secretarias e locais',
+          linkName: 'Secretarias, Fundações e Autarquias',
+        },
+        {
+          target: '/cadastros/unidades',
+          open: open,
+          icon: '🏛️',
+          linkName: 'Unidades Administrativas',
         }
       ]
     },
