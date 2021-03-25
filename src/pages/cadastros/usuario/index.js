@@ -21,57 +21,24 @@ import EditItem from '../../../components/editItem';
 function UsuariosSistema() {
     
 
-    const [users, setUsers] = useState([]);
-    /*const [data, setData] = useState(initialState);
-    const [usersPesquisa, setUsersPesquisa] = useState([]);*/
+    const [users, setUsers] = useState([]);    
   
     async function loadUsers() {
-      const response = await api.get('/users/index');      
-        setUsers(response.data);      
+      await api.get('/users/index')
+      .then((response) => setUsers(response.data))
+      .catch(() => toast.error("Não foi possível carregar os usuário", {position: toast.POSITION.TOP_RIGHT}))   
     }
 
     useEffect(() => {
-      loadUsers();
+      loadUsers();      
     },[]);
 
-    async function handleUserActivation(e, user) {
-
-      e.preventDefault();
-      
-      user.userActive = !user.userActive;
-      
-      const response = await api.put('/users/activation', {
-        login: user.userLoginName,
-        email: user.userEmail,
-        active: user.userActive,
-      });
-
-      response ? loadUsers() : toast.error("Não foi possível atualizar", {position: toast.POSITION.TOP_RIGHT});
+    async function activateUser(user) {       
+      await api.put('/users/activation', {id: user.id})
+      .then(() => loadUsers())
+      .catch(() => toast.error("Não foi possível atualizar o usuário", {position: toast.POSITION.TOP_RIGHT}))      
     }
-   
-    /* async function handleSearch(searchTerm) {
-      if(searchTerm) {
-        const response = await api.get(`/users/search?searchTerm=${searchTerm}`);
-        (response.data.length > 0) ? setUsersPesquisa(response.data) : toast.error("A busca não retornou resultados!", {position: toast.POSITION.TOP_RIGHT})           
-      }
-    } */
 
-    /* async function handlePassReset(user) {
-      console.log(user);
-      try {
-        const response = await api.put('/users/passUpdate',{
-          id: user.id,
-          userLoginName: user.userLoginName,
-          userEmail: user.userEmail,
-        });
-        console.log(response.data);      
-        toast.success(`Senha padrão definida para o usuário ${user.userLoginName}`,{position: toast.POSITION.TOP_RIGHT});      
-    
-      } catch (err) {
-        toast.error("Senha não alterada!", {position: toast.POSITION.TOP_RIGHT})
-      }
-    } */
-    
   return (
     <>
       <Header title="Usuários" title_full="Usuários cadastrados no sistema"/>
@@ -99,7 +66,7 @@ function UsuariosSistema() {
               <GridColumn grid='1'>{user.userLoginName}</GridColumn>
               <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
               <GridColumn grid='0.6'>{user.userName}</GridColumn>              
-              <GridColumn grid='0.5'><button name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
+              <GridColumn grid='0.5'><button name={'Desativar'} onClick={() => activateUser(user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
               <GridColumn grid='0.5'>
                 <EditItem
                   pathname={"/cadastros/usuarios/alterar"}
@@ -147,7 +114,7 @@ function UsuariosSistema() {
                     user,
                   }}
                 />              
-                <OptionsBoxItem name={'Desativar'} onClick={(e) => handleUserActivation(e, user)}/>
+                <OptionsBoxItem name={'Desativar'} onClick={() => activateUser(user)}/>
                 <EditItem
                   pathname={"/cadastros/usuarios/alterar"}
                   description={"Editar"}
