@@ -45,13 +45,7 @@ function UsuariosSistema() {
       {localStorage.getItem('@fraIT/viewMode') === 'grid' ? 
       (
         <BodyGrid>
-          <AddNewItemGrid
-        pathname={"/cadastros/usuarios/novo"}
-        description={"Novo usuário"}
-        payload={{
-          valid: false
-        }}
-      />
+          <AddNewItemGrid pathname={"/cadastros/usuarios/novo"} description={"Novo usuário"}/>
           <GridRow header={true}>
             <GridColumn grid='1'>Usuário</GridColumn>
             <GridColumn grid='2.5'>E-mail</GridColumn>
@@ -68,23 +62,10 @@ function UsuariosSistema() {
               <GridColumn grid='0.6'>{user.userName}</GridColumn>              
               <GridColumn grid='0.5'><button name={'Desativar'} onClick={() => activateUser(user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
               <GridColumn grid='0.5'>
-                <EditItem
-                  pathname={"/cadastros/usuarios/alterar"}
-                  description={"🖊️"}
-                  payload={{
-                    user,
-                    valid: true
-                  }}
-                />
+                <EditItem pathname={"/cadastros/usuarios/alterar"} description={"🖊️"} payload={{user}}/>
               </GridColumn>
               <GridColumn grid='0'>
-              <EditItem 
-                  pathname={"/cadastros/usuarios/detalhes"}
-                  description={"Detalhes"}
-                  payload={{
-                    user,
-                  }}
-                />
+                <EditItem pathname={"/cadastros/usuarios/detalhes"} description={"Detalhes"} payload={{user}} />
               </GridColumn>
             </GridRow>
           )))}

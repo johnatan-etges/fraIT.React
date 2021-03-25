@@ -35,13 +35,7 @@ function Entidades() {
         {localStorage.getItem('@fraIT/viewMode') === 'grid' ?
             (
                 <BodyGrid>
-                    <AddNewItemGrid
-                        pathname={"/cadastros/entidades/nova"}
-                        description={"Nova Entidade"}
-                        payload={{
-                            valid: false
-                        }}
-                    />                    
+                    <AddNewItemGrid pathname={"/cadastros/entidades/novo"} description={"Nova Entidade"}/>                    
                     <GridRow>
                         <GridColumn grid='1.5'>Nome</GridColumn>
                         <GridColumn grid='2'>Descrição</GridColumn>
@@ -62,12 +56,7 @@ function Entidades() {
             
                 <BodyCard>
                     <AddNewItemCard
-                        pathname={"/cadastros/entidades/nova"}
-                        description={"Nova Entidade"}
-                        payload={{
-                            valid: false
-                        }}
-                    />
+                        pathname={"/cadastros/entidades/novo"} description={"Nova Entidade"}/>
                     {entidades.map(entidade => 
                         <ContentCard>
                             <div className={"cardHeader"}>
