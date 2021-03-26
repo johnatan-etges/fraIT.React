@@ -15,28 +15,25 @@ import api from '../../../../services/api';
 
 function NewUser(props) {
 
-    const history = useHistory();
-    var user = ""
+    const history = useHistory();    
+    const { user, valid }  = props.location.state.payload;    
 
-    const editMode = user ? true : false
+    const editMode = valid ? true : false
     const buttonTitle = editMode ? "Editar usuário" : "Novo usuário"
     const title_full = editMode ? `Editando usuário: ${user.userName}` : "Criando novo usuário"
-    const title = editMode ? `Editando ${user.userName}` : "Novo usuário"          
+    const title = editMode ? `Editando ${user.userName}` : "Novo usuário"    
 
     const [data, setData] = useState({
-        id: user ? user.id : "",
-        name: user ? user.userName : "",
-        surName: user ? user.userSurName : "",
-        login: user ? user.userLoginName : "",
-        email: user ? user.userEmail : "",
+        id: valid ? user.id : "",
+        name: valid ? user.userName : "",
+        surName: valid ? user.userSurName : "",
+        login: valid ? user.userLoginName : "",
+        email: valid ? user.userEmail : "",
         passToVerify: "",
         password: "",
-        avatarURL: user ? user.userAvatarURL : "",
+        avatarURL: valid ? user.userAvatarURL : "",
     });
-
-    if ((props.location.state) && (props.location.state.user)) {
-        user = props.location.state.payload.user;
-    }
+    
 
     function validaSenha(password) {
         if (password !== data.passToVerify) {

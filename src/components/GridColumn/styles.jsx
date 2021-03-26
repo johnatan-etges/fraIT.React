@@ -6,9 +6,9 @@ export const GColumn = styled.div`
     min-height: 1px;
     box-sizing: border-box;
     width: 100%;
-
+    
     @media only screen and (min-width: ${({theme}) => theme.tablet}) {
-    width: ${props => (props.grid ? props.grid / 7 * 100 : '16.66')}%
+    width: ${props => (props.grid ? props.grid / 7 * 100 : '16.66')}%;
     }
 
     button {

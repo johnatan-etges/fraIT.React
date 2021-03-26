@@ -9,7 +9,7 @@ export const Container = styled.div`
     color: ${({theme}) => theme.contrast};
 
     &:hover {
-      cursor: pointer;
+      cursor: pointer;      
     }
   }
 

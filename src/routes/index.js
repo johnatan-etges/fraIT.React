@@ -23,6 +23,7 @@ function routes() {
         <Route path="/cadastros/usuarios/detalhes" exact component={UserDetails} isPrivate/>
         <Route path="/cadastros/entidades" exact component={Entidades} isPrivate/>
         <Route path="/cadastros/entidades/novo" exact component={NewEntidade} isPrivate/>
+        <Route path="/cadastros/entidades/alterar" exact component={NewEntidade} isPrivate/>
         <Route path="/cadastros/unidades" component={UnidadesAdministrativas} isPrivate/>
       </Switch>
     </BrowserRouter>      

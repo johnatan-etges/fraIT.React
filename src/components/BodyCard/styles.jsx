@@ -3,11 +3,11 @@ import styled from 'styled-components';
 export const Container = styled.div`
 
   width: 35vw;
-  height: 100vh;
+  height: 90vh;
 
   display: flex;
   flex-direction: column;
-  margin: 85px auto -6.5vw;
+  margin: 85px auto -3.5vh;
 
   box-sizing: border-box;
   overflow: hidden;
