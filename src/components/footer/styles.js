@@ -10,7 +10,7 @@ export const StyledFooter = styled.div`
     /* height: 5.8vh; */
     padding: .5vh 0;
     background-color: ${({theme}) => theme.primary};
-    opacity: .2;
+    opacity: .1;
 
     border-top: 1px solid ${({theme}) => theme.contrast};
     transition: .2s linear;

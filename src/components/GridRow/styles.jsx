@@ -4,7 +4,7 @@ export const GRow = styled.div`
     width: 100%;
     height: auto;
     /* float: left; */
-    box-sizing: border-box;
+    box-sizing: border-box;    
     ::before,
     ::after {
     content: '';

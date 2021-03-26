@@ -15,14 +15,13 @@ import api from '../../../../services/api';
 
 function NewUser(props) {
 
-    const { user, valid } = props.location.state.payload;    
-
-    const history = useHistory();
+    const history = useHistory();    
+    const { user, valid }  = props.location.state.payload;    
 
     const editMode = valid ? true : false
     const buttonTitle = editMode ? "Editar usuário" : "Novo usuário"
     const title_full = editMode ? `Editando usuário: ${user.userName}` : "Criando novo usuário"
-    const title = editMode ? `Editando ${user.userName}` : "Novo usuário"
+    const title = editMode ? `Editando ${user.userName}` : "Novo usuário"    
 
     const [data, setData] = useState({
         id: valid ? user.id : "",
@@ -34,6 +33,7 @@ function NewUser(props) {
         password: "",
         avatarURL: valid ? user.userAvatarURL : "",
     });
+    
 
     function validaSenha(password) {
         if (password !== data.passToVerify) {
