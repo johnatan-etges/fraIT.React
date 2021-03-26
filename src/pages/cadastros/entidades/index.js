@@ -21,9 +21,9 @@ function Entidades() {
     const [entidades, setEntidades] = useState([])
     
     async function loadEntidades() {
-        api.get('/cadastros/entidades/index')
+        await api.get('/cadastros/entidades/index')
         .then((response) => setEntidades(response.data))
-        .catch(() => toast.error("Não foi possível carregar os usuário!", {position: toast.POSITION.TOP_RIGHT}))
+        .catch(() => toast.error("Não foi possível carregar os usuários!", {position: toast.POSITION.TOP_RIGHT}))
     }
 
     useEffect(() => {
