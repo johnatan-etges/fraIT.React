@@ -7,7 +7,7 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  margin: 80px auto -7vw;
+  margin: 80px auto -13vh;
 
   box-sizing: border-box;
   overflow: hidden;
