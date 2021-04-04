@@ -22,6 +22,14 @@ export const StyledSideBar = styled.nav`
     border: 1px solid ${({theme, open}) => (open) ? theme.primaryLight : theme.primaryDark};
   }
 
+  @media (max-width: ${({theme}) => theme.narrow}) {
+    width: 35%;
+  }
+
+  @media (max-width: ${({theme}) => theme.tablet}) {
+    width: 45%;
+  }
+
   @media (max-width: ${({theme}) => theme.mobile}) {
     width: 100%;
   }

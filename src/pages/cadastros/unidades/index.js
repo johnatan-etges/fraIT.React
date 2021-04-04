@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
-import Header from '../../../components/header';
-import BodyCard from '../../../components/BodyCard';
-import BodyGrid from '../../../components/BodyGrid';
-import Footer from '../../../components/footer';
-import GridRow from '../../../components/GridRow';
-import GridColumn from '../../../components/GridColumn';
+import api from '../../../services/api'
 
-function UnidadesAdministrativas() {
+import Header from '../../../components/header'
+import BodyCard from '../../../components/BodyCard'
+import BodyGrid from '../../../components/BodyGrid'
+import Footer from '../../../components/footer'
+import GridRow from '../../../components/GridRow'
+import GridColumn from '../../../components/GridColumn'
+
+function UnidadesAdministrativas(){
+
+    const [unidades, setUnidades] = useState([])
+
+    useEffect(() => {
+        loadUnidades()
+    },[])
+
+    async function loadUnidades(){
+        await api.get('/cadastros/unidades/index')
+        .then((response) => setUnidades(response.data))
+        .catch(() => toast.error("Ocorreu um erro ao carregar as unidades!"))
+    }
+
   return (
       <>
         <Header/>
@@ -23,25 +39,17 @@ function UnidadesAdministrativas() {
                         <GridColumn grid={'0.5'}>Ação</GridColumn>
                         <GridColumn grid={'0.5'}>Detalhes</GridColumn>
                     </GridRow>
-
-                    <GridRow>
-                        <GridColumn grid={'1.8'}>Escola Antonio Porto Burda</GridColumn>
-                        <GridColumn grid={'1.5'}>Secretaria de Educação, Cultura e Esportes</GridColumn>                        
-                        <GridColumn grid={'0.8'}>3256-4287</GridColumn>
-                        <GridColumn grid={'0.8'}>187.102.14.74</GridColumn>
-                        <GridColumn grid={'0.8'}>Helena Frigoto</GridColumn>
-                        <GridColumn grid={'0.5'}>Desativar</GridColumn>
-                        <GridColumn grid={'0.5'}>Detalhes</GridColumn>
-                    </GridRow>
-                    <GridRow>
-                        <GridColumn grid={'1.8'}>Órgão Executivo de Trânsito de Fraiburgo - ORTFRAI</GridColumn>
-                        <GridColumn grid={'1.5'}>Secretaria de Infraestrutura Urbana e Rural</GridColumn>                        
-                        <GridColumn grid={'0.8'}>3256-3074</GridColumn>
-                        <GridColumn grid={'0.8'}>187.102.14.88</GridColumn>
-                        <GridColumn grid={'0.8'}>Valdecir Cordeiro</GridColumn>
-                        <GridColumn grid={'0.5'}>Desativar</GridColumn>
-                        <GridColumn grid={'0.5'}>Detalhes</GridColumn>
-                    </GridRow>
+                    {unidades.map(unidade => 
+                        <GridRow key={Math.random(unidade.id)*Math.random()}>
+                            <GridColumn grid={'1.8'}>{unidade.name}</GridColumn>
+                            <GridColumn grid={'1.5'}>{unidade.Entidade.name}</GridColumn>                        
+                            <GridColumn grid={'0.8'}>{unidade.phoneNumber}</GridColumn>
+                            <GridColumn grid={'0.8'}>{unidade.ipAddress}</GridColumn>
+                            <GridColumn grid={'0.8'}>{unidade.responsible}</GridColumn>
+                            <GridColumn grid={'0.5'}>Desativar</GridColumn>
+                            <GridColumn grid={'0.5'}>Detalhes</GridColumn>
+                        </GridRow>
+                    )}
                 </BodyGrid>
             ):
             ( 
