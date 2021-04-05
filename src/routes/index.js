@@ -10,6 +10,7 @@ import UserDetails from '../pages/cadastros/usuario/user-details';
 import Entidades from '../pages/cadastros/entidades';
 import NewEntidade from '../pages/cadastros/entidades/new-entidade';
 import UnidadesAdministrativas from '../pages/cadastros/unidades';
+import NewUnidade from '../pages/cadastros/unidades/new-unidade'
 
 function routes() {  
   return (        
@@ -24,7 +25,9 @@ function routes() {
         <Route path="/cadastros/entidades" exact component={Entidades} isPrivate/>
         <Route path="/cadastros/entidades/novo" exact component={NewEntidade} isPrivate/>
         <Route path="/cadastros/entidades/alterar" exact component={NewEntidade} isPrivate/>
-        <Route path="/cadastros/unidades" component={UnidadesAdministrativas} isPrivate/>
+        <Route path="/cadastros/unidades" exact component={UnidadesAdministrativas} isPrivate/>
+        <Route path="/cadastros/unidades/alterar" exact component={NewUnidade} isPrivate/>
+        <Route path="/cadastros/unidades/novo" exact component={NewUnidade} isPrivate/>
       </Switch>
     </BrowserRouter>      
   );
