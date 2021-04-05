@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-import Header from '../../../../components/header';
-import BodyCard from '../../../../components/BodyCard';
-import Footer from '../../../../components/footer';
-import GoBack from '../../../../components/go-back';
-import EditItem from '../../../../components/editItem';
+import Header from '../../../../components/header'
+import BodyCard from '../../../../components/BodyCard'
+import Footer from '../../../../components/footer'
+import GoBack from '../../../../components/go-back'
+import EditItem from '../../../../components/editItem'
 
 import { Container } from './styles';
 
 function UserDetails(props) {
 
-    const { user } = props.location.state.payload;
+    const { user } = props.location.state.payload
 
   return (
       <>

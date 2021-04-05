@@ -1,16 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 
-import Route from './Route';
-import Signin from '../pages/SignIn';
-import Dashboard from '../pages/Dashboard';
-import UsuariosSistema from '../pages/cadastros/usuario';
-import NewUser from '../pages/cadastros/usuario/new-user';
-import UserDetails from '../pages/cadastros/usuario/user-details';
-import Entidades from '../pages/cadastros/entidades';
-import NewEntidade from '../pages/cadastros/entidades/new-entidade';
-import UnidadesAdministrativas from '../pages/cadastros/unidades';
+import Route from './Route'
+import Signin from '../pages/SignIn'
+import Dashboard from '../pages/Dashboard'
+import UsuariosSistema from '../pages/cadastros/usuarios'
+import NewUser from '../pages/cadastros/usuarios/new-user'
+import UserDetails from '../pages/cadastros/usuarios/user-details'
+import Entidades from '../pages/cadastros/entidades'
+import NewEntidade from '../pages/cadastros/entidades/new-entidade'
+import UnidadesAdministrativas from '../pages/cadastros/unidades'
 import NewUnidade from '../pages/cadastros/unidades/new-unidade'
+import UnidadeDetails from '../pages/cadastros/unidades/unidade-details'
 
 function routes() {  
   return (        
@@ -28,6 +29,7 @@ function routes() {
         <Route path="/cadastros/unidades" exact component={UnidadesAdministrativas} isPrivate/>
         <Route path="/cadastros/unidades/alterar" exact component={NewUnidade} isPrivate/>
         <Route path="/cadastros/unidades/novo" exact component={NewUnidade} isPrivate/>
+        <Route path="/cadastros/unidades/detalhes" exact component={UnidadeDetails} isPrivate/>
       </Switch>
     </BrowserRouter>      
   );

@@ -28,6 +28,26 @@ function UnidadesAdministrativas(){
         .catch(() => toast.error("Ocorreu um erro ao carregar as unidades!"))
     }
 
+    async function activateUnidade(unidade) {
+        await api.put('/cadastros/unidades/activate',{ID: unidade.ID})
+        .then(() => {
+            loadUnidades()
+            toast.success("Unidade atualizada com sucesso!", {position: toast.POSITION.TOP_RIGHT})
+        })
+        .catch((err) => {
+            switch(err) {
+                case 400:
+                  toast.error("Não foi possível encontrar a unidade", {position: toast.POSITION.TOP_RIGHT})            
+                  break
+                case 500:
+                  toast.error("Ocorreu um erro ao atualizar a unidade!", {position: toast.POSITION.TOP_RIGHT})
+                  break
+                default:
+                    break
+              }
+        })
+    }
+
   return (
       <>
         <Header/>
@@ -46,7 +66,7 @@ function UnidadesAdministrativas(){
                         <GridColumn grid={'0.8'}>IP</GridColumn>
                         <GridColumn grid={'0.8'}>Responsável</GridColumn>
                         <GridColumn grid={'0.5'}>Ação</GridColumn>
-                        <GridColumn grid={'0.5'}>Detalhes</GridColumn>
+                        <GridColumn grid={'0.5'}></GridColumn>
                     </GridRow>
                     {unidades.map(unidade => 
                         <GridRow key={Math.random(unidade.id)*Math.random()}>
@@ -55,8 +75,11 @@ function UnidadesAdministrativas(){
                             <GridColumn grid={'0.8'}>{unidade.phoneNumber}</GridColumn>
                             <GridColumn grid={'0.8'}>{unidade.ipAddress}</GridColumn>
                             <GridColumn grid={'0.8'}>{unidade.responsible}</GridColumn>
-                            <GridColumn grid={'0.5'}>Desativar<EditItem pathname={"/cadastros/unidades/alterar"} description={"🖊️"} payload={{unidade, valid:true}}/></GridColumn>
-                            <GridColumn grid={'0.5'}>Detalhes</GridColumn>
+                            <GridColumn grid={'0.5'}>
+                                <button name={"activation"} onClick={() => activateUnidade(unidade)}>{unidade.active ? '⬇️' : '⬆️'}</button>
+                                <EditItem pathname={"/cadastros/unidades/alterar"} description={"🖊️"} payload={{unidade, valid:true}}/>
+                            </GridColumn>
+                            <GridColumn grid={'0.5'}><EditItem pathname={"/cadastros/unidades/detalhes"} payload={{unidade}} description={"Detalhes"}/></GridColumn>
                         </GridRow>
                     )}
                 </BodyGrid>

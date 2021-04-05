@@ -43,7 +43,7 @@ function NewUnidade(props) {
     },[])
 
     async function loadAuxData() {
-        await api.get('/cadastros/entidades/index')
+        await api.get('/cadastros/entidades/indexActive')
         .then((response) => setEntidades(response.data))
         .catch((err) => toast.error("Não foi possível carregar as entidades", {position: toast.POSITION.TOP_RIGHT}))
 
@@ -68,7 +68,18 @@ function NewUnidade(props) {
             toast.success("Unidade criada com sucesso!", {position: toast.POSITION.TOP_RIGHT})
             history.push('/cadastros/unidades')
         })
-        .catch((err) => toast.error("Ocorreu um erro ao criar a unidade!", {position: toast.POSITION.TOP_RIGHT}))
+        .catch((err) => {
+            switch(err.response.status) {
+                case 400:
+                  toast.error("Os campos 'nome', 'Entidade' e 'Tipo de Unidade' são obrigatórios", {position: toast.POSITION.TOP_RIGHT})
+                  break
+                case 500:
+                  toast.error("Ocorreu um erro ao criar a entidade!", {position: toast.POSITION.TOP_RIGHT})
+                  break
+                default:
+                  break
+              }
+        })
     }
 
     async function updateUnidade() {

@@ -63,8 +63,7 @@ function Entidades() {
                         <GridColumn grid='1.5'>Nome</GridColumn>
                         <GridColumn grid='2'>Descrição</GridColumn>
                         <GridColumn grid='2.5'>Missão</GridColumn>                        
-                        <GridColumn grid='0.5'>Atualizar</GridColumn>
-                        <GridColumn grid='0.5'>Ação</GridColumn>
+                        <GridColumn grid='0.5'>Ação</GridColumn>                        
                     </GridRow>
                     {entidades.map(entidade => 
                         <GridRow>
@@ -73,8 +72,8 @@ function Entidades() {
                             <GridColumn grid='2.5'>{entidade.legacy}</GridColumn>
                             <GridColumn grid='0.5'>
                                 <EditItem pathname={"/cadastros/entidades/alterar"} description={"🖊️"} payload={{entidade, valid: true}}/>
-                            </GridColumn>
-                            <GridColumn grid='0.5'><button name={'ativation'} onClick={() => activateEntidade(entidade)}>{entidade.active ? 'Desativar' : 'Ativar'}</button></GridColumn>
+                                <button name={'activation'} onClick={() => activateEntidade(entidade)}>{entidade.active ? '⬇️' : '⬆️'}</button>
+                            </GridColumn>                            
                         </GridRow>
                     )}
                 </BodyGrid>
