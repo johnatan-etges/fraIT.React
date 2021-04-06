@@ -9,7 +9,9 @@ import GoBack from '../../../../components/go-back'
 import Input from '../../../../components/input'
 import SendFormBtn from '../../../../components/SendFormBtn'
 import Footer from '../../../../components/footer'
-import api from '../../../../services/api';
+import Select from '../../../../components/select'
+
+import api from '../../../../services/api'
 
 function NewUnidade(props) {
 
@@ -22,7 +24,7 @@ function NewUnidade(props) {
     const title = editMode ? `Editando ${unidade.name}` : "Nova unidade"
 
     const [unidadeTypes, setUnidadeTypes] = useState([])
-    const [entidades, setEntidades] = useState([])
+    const [entidades, setEntidades] = useState([])    
     const [unidadeData, setUnidadeData] = useState({
         ID: valid ? unidade.ID : "",
         name: valid ? unidade.name : "",
@@ -44,13 +46,18 @@ function NewUnidade(props) {
 
     async function loadAuxData() {
         await api.get('/cadastros/entidades/indexActive')
-        .then((response) => setEntidades(response.data))
+        .then((response) => setEntidades(prepareForSelect(response.data)))
         .catch((err) => toast.error("Não foi possível carregar as entidades", {position: toast.POSITION.TOP_RIGHT}))
 
         await api.get('/cadastros/unidades/unidadeTypes/index')
-        .then((response) => setUnidadeTypes(response.data))
+        .then((response) => /* setUnidadeTypes(response.data) */ setUnidadeTypes(prepareForSelect(response.data)))
         .catch((err) => toast.error("Não foi possível carregar os tipos de unidades", {position: toast.POSITION.TOP_RIGHT}))
-    }    
+    }
+    
+    function prepareForSelect(fetchedSelectData) {
+        let dataToSet = fetchedSelectData.map(individualData => ({value: individualData.id || individualData.ID, label: individualData.name}))
+        return dataToSet
+    }
 
     async function createUnidade() {
         await api.post('/cadastros/unidades/store', {
@@ -132,15 +139,19 @@ function NewUnidade(props) {
             <select name={"entidade"} id={"entidade"} onChange={(e) => setUnidadeData({...unidadeData, EntidadeID: e.target.value})}>
                 {unidadeData.name !== "" && <option selected value={unidadeData.EntidadeID}>{unidadeData.EntidadeName}</option>}
                 {entidades.map(entidade =>                    
-                    <option value={entidade.id}>{entidade.name}</option>
+                    <option value={entidade.value}>{entidade.label}</option>
                 )}
             </select>
-            {<select name={"unidade_type"} id={"unidade_type"} onChange={(e) => setUnidadeData({...unidadeData, UnidadeTypeID: e.target.value})}>
+            <select name={"unidade_type"} id={"unidade_type"} onChange={(e) => setUnidadeData({...unidadeData, UnidadeTypeID: e.target.value})}>
                 {unidadeData.name !== "" && <option selected value={unidadeData.UnidadeTypeID}>{unidadeData.UnidadeTypeName}</option>}
                 {unidadeTypes.map(unidadeType =>
-                    <option value={unidadeType.ID}>{unidadeType.name}</option>
+                    <option value={unidadeType.value}>{unidadeType.label}</option>
                 )}
-            </select>}
+            </select>                  
+            <Select                
+                options={entidades}
+                onChange={value => setUnidadeData({ ...unidadeData, EntidadeID: value })}
+            />
             <Input
                 id={"unidade_address"}
                 name={"unidade_address"}
