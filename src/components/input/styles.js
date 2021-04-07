@@ -21,16 +21,21 @@ export const Container = styled.div`
     font-size: 1rem;
     color: ${({theme}) => theme.contrast};
     caret-color: ${({theme}) => theme.contrast};
-    transition: all .2s ease;
+    //transition: all .1s ease;
     z-index: 500;
     width: 100%;
     border-radius: 10px;
-
+    
     border: 1px solid ${({theme}) => theme.contrast};
+
+    &:hover {
+        border-color: ${({theme}) => theme.special};
+    }
+    
     //makes border red if required no attended
     ${props => !props.valid && `
       border: 2px solid red;
-    `}
+    `}    
 
     ::placeholder {
       color: ${({theme}) => theme.contrast};
@@ -47,7 +52,7 @@ export const Container = styled.div`
     font-size: 1rem;
     font-weight: 800;
     top: .5rem;
-    transition: all .2s ease;
+    //transition: all .1s ease;
     margin-left: 1rem;
     background-color: ${({theme}) => theme.primary};
 

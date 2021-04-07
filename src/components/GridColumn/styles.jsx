@@ -17,4 +17,8 @@ export const GColumn = styled.div`
     color: ${({theme}) => theme.contrast};
     font-size: 1rem;
     }
+
+    span {
+        margin: 0.2rem;
+    }
 `;

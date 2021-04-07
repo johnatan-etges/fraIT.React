@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 import { Container } from './styles';
 
-function Input({value, type, label, required, onChange, onFocus, onBlur, setRef, spellCheck, width, id, ...props}) {
+function Input({value, type, label, required, onChange, onFocus, onBlur, spellCheck, width, id, ...props}) {
 
   const [focused, setFocused] = useState(false);
   const [valid, setValid] = useState(true);
 
-  useEffect(() => {
-    value ? setFocused(true) : setFocused(false)
-  },[value]) //pode dar pau
+  useEffect(() => {verifyFocus(value)},[value]) 
 
   const isValid = (valueToValidate) => {
     if (required && !valueToValidate) {
@@ -19,13 +17,17 @@ function Input({value, type, label, required, onChange, onFocus, onBlur, setRef,
     }
   }
 
+  const verifyFocus = (valueToVerify) => {
+    valueToVerify ? setFocused(true) : setFocused(false)
+  }
+
   function handleOnFocus() {
       setFocused(true);
       onFocus && onFocus(); 
   }
 
   function handleOnBlur(e) {
-    e.target.value ? setFocused(true) : setFocused(false);
+    verifyFocus(e.target.value)
     isValid(e.target.value);
     onBlur && onBlur(e.target.value);
   }
@@ -44,8 +46,7 @@ function Input({value, type, label, required, onChange, onFocus, onBlur, setRef,
         type={type}
         onChange={handleOnChange}
         onFocus={handleOnFocus}
-        onBlur={handleOnBlur}
-        ref={ref => setRef(ref)}
+        onBlur={handleOnBlur}       
         spellCheck={spellCheck}
         defaultValue={value}
         {...props}
@@ -57,9 +58,9 @@ function Input({value, type, label, required, onChange, onFocus, onBlur, setRef,
 Input.defaultProps = {
   type: "text",
   label: "",
-  spellCheck: true,
-  setRef: () => {},
-  value:""
+  spellCheck: true,  
+  value:"",
+  required: false,
 }
 
 export default Input;

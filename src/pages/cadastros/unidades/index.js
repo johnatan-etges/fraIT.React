@@ -76,8 +76,8 @@ function UnidadesAdministrativas(){
                             <GridColumn grid={'0.8'}>{unidade.ipAddress}</GridColumn>
                             <GridColumn grid={'0.8'}>{unidade.responsible}</GridColumn>
                             <GridColumn grid={'0.5'}>
-                                <button name={"activation"} onClick={() => activateUnidade(unidade)}>{unidade.active ? '⬇️' : '⬆️'}</button>
-                                <EditItem pathname={"/cadastros/unidades/alterar"} description={"🖊️"} payload={{unidade, valid:true}}/>
+                                <span><button name={"activation"} onClick={() => activateUnidade(unidade)}>{unidade.active ? '⬇️' : '⬆️'}</button></span>
+                                <span><EditItem pathname={"/cadastros/unidades/alterar"} description={"🖊️"} payload={{unidade, valid:true}}/></span>
                             </GridColumn>
                             <GridColumn grid={'0.5'}><EditItem pathname={"/cadastros/unidades/detalhes"} payload={{unidade}} description={"Detalhes"}/></GridColumn>
                         </GridRow>

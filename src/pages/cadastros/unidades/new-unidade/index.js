@@ -41,20 +41,21 @@ function NewUnidade(props) {
     })
 
     useEffect(() => {
-        loadAuxData()        
+        async function loadAuxData() {
+            await api.get('/cadastros/entidades/indexActive')
+            .then((response) => setEntidades(prepareDataForSelect(response.data)))
+            .catch((err) => toast.error("Não foi possível carregar as entidades", {position: toast.POSITION.TOP_RIGHT}))
+    
+            await api.get('/cadastros/unidades/unidadeTypes/index')
+            .then((response) => setUnidadeTypes(prepareDataForSelect(response.data)))
+            .catch((err) => toast.error("Não foi possível carregar os tipos de unidades", {position: toast.POSITION.TOP_RIGHT}))
+        }
+        loadAuxData()
     },[])
 
-    async function loadAuxData() {
-        await api.get('/cadastros/entidades/indexActive')
-        .then((response) => setEntidades(prepareForSelect(response.data)))
-        .catch((err) => toast.error("Não foi possível carregar as entidades", {position: toast.POSITION.TOP_RIGHT}))
-
-        await api.get('/cadastros/unidades/unidadeTypes/index')
-        .then((response) => /* setUnidadeTypes(response.data) */ setUnidadeTypes(prepareForSelect(response.data)))
-        .catch((err) => toast.error("Não foi possível carregar os tipos de unidades", {position: toast.POSITION.TOP_RIGHT}))
-    }
     
-    function prepareForSelect(fetchedSelectData) {
+    
+    function prepareDataForSelect(fetchedSelectData) {
         let dataToSet = fetchedSelectData.map(individualData => ({value: individualData.id || individualData.ID, label: individualData.name}))
         return dataToSet
     }
@@ -136,29 +137,27 @@ function NewUnidade(props) {
                 onBlur={(value) => setUnidadeData({...unidadeData, name: value})}              
                 required
             />            
-            <select name={"entidade"} id={"entidade"} onChange={(e) => setUnidadeData({...unidadeData, EntidadeID: e.target.value})}>
-                {unidadeData.name !== "" && <option selected value={unidadeData.EntidadeID}>{unidadeData.EntidadeName}</option>}
-                {entidades.map(entidade =>                    
-                    <option value={entidade.value}>{entidade.label}</option>
-                )}
-            </select>
-            <select name={"unidade_type"} id={"unidade_type"} onChange={(e) => setUnidadeData({...unidadeData, UnidadeTypeID: e.target.value})}>
-                {unidadeData.name !== "" && <option selected value={unidadeData.UnidadeTypeID}>{unidadeData.UnidadeTypeName}</option>}
-                {unidadeTypes.map(unidadeType =>
-                    <option value={unidadeType.value}>{unidadeType.label}</option>
-                )}
-            </select>                  
-            <Select                
+            <Select
+                selected={unidade && {value: unidade.Entidade.id, label: unidade.Entidade.name}}
+                label={"Entidade"}
                 options={entidades}
                 onChange={value => setUnidadeData({ ...unidadeData, EntidadeID: value })}
+                required
             />
+            <Select
+                selected={unidade && {value: unidade.UnidadeType.ID, label: unidade.UnidadeType.name}}
+                label={"Tipo"}                               
+                options={unidadeTypes}
+                onChange={value => setUnidadeData({...unidadeData, UnidadeTypeID: value})}
+                required             
+            />            
             <Input
                 id={"unidade_address"}
                 name={"unidade_address"}
                 label={"Endereço completo"}
                 value={unidadeData.address}
                 onBlur={(value) => setUnidadeData({...unidadeData, address: value})}
-            />
+            />          
             <Input
                 id={"unidade_phoneNumber"}
                 name={"unidade_phoneNumber"}
@@ -166,7 +165,7 @@ function NewUnidade(props) {
                 value={unidadeData.phoneNumber}
                 onBlur={(value) => setUnidadeData({...unidadeData, phoneNumber: value})}
             />
-            <Input
+            <Input    
                 id={"unidade_ipAddress"}
                 name={"unidade_ipAddress"}
                 label={"Endereço IP"}
