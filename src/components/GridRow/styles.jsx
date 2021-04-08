@@ -4,7 +4,7 @@ export const GRow = styled.div`
     width: 100%;
     height: auto;
     /* float: left; */
-    box-sizing: border-box;    
+    box-sizing: border-box;
     ::before,
     ::after {
     content: '';
@@ -12,6 +12,10 @@ export const GRow = styled.div`
     }
     ::after {
         clear: both;
+    }
+
+    &:hover {
+        background-color: ${({theme}) => theme.BODY_CARD_BACKGROUND};
     }
 
     border-bottom: 1px solid ${({theme}) => theme.special};

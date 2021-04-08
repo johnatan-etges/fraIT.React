@@ -73,6 +73,33 @@ export const Container = styled.div`
 
     }
 
+    .card-list {
+      width: 100%;
+      height: auto;
+      //max-height: 250px;
+      
+      display: flex;
+      flex-direction: column;
+
+      border-bottom: 1px solid white;
+
+      .card-item-box {
+        width: auto;
+        //max-width: 40%;
+        display: flex;
+        flex-direction: column;
+
+        .card-item-box-label {
+          font-size: .8rem;
+          font-weight: 400;
+          color: ${({theme}) => theme.contrast};
+          opacity: 0.5;
+
+          margin-bottom: -20px;
+        }
+      }
+    }
+
     .footer {
       width: 100%;
       height: auto;
