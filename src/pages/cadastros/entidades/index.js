@@ -60,17 +60,17 @@ function Entidades() {
                 <BodyGrid>
                     <AddNewItemGrid pathname={"/cadastros/entidades/novo"} description={"Nova Entidade"} payload={{valid: false}}/>                    
                     <GridRow>
-                        <GridColumn grid='1.5'>Nome</GridColumn>
-                        <GridColumn grid='2'>Descrição</GridColumn>
-                        <GridColumn grid='2.5'>Missão</GridColumn>                        
+                        <GridColumn grid='2.5'>Nome</GridColumn>
+                        <GridColumn grid='3.5'>Descrição</GridColumn>
+                        {/* <GridColumn grid='2.5'>Missão</GridColumn> */}                        
                         <GridColumn grid='0.5'>Ação</GridColumn>
                         <GridColumn grid='0.5'></GridColumn>                        
                     </GridRow>
                     {entidades.map(entidade => 
                         <GridRow>
-                            <GridColumn grid='1.5'>{entidade.name}</GridColumn>
-                            <GridColumn grid='2'>{entidade.description}</GridColumn>
-                            <GridColumn grid='2.5'>{entidade.legacy}</GridColumn>
+                            <GridColumn grid='2.5'>{entidade.name}</GridColumn>
+                            <GridColumn grid='3.5'>{entidade.description}</GridColumn>
+                            {/* <GridColumn grid='2.5'>{entidade.legacy}</GridColumn> */}
                             <GridColumn grid='0.5'>
                                 <EditItem pathname={"/cadastros/entidades/alterar"} description={"🖊️"} payload={{entidade, valid: true}}/>
                                 <button name={'activation'} onClick={() => activateEntidade(entidade)}>{entidade.active ? '⬇️' : '⬆️'}</button>

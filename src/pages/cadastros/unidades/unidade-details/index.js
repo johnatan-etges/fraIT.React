@@ -47,19 +47,23 @@ function UnidadeDetails(props) {
                         <span className={"card-body-text-item"}>Em construção</span>
                     </div>
                 </div>
-                <div className={"card-section-title"}>
-                    <span>Informações do(a) responsável</span>
-                </div>
-                <div className={"card"}>
-                    <div className={"card-item-box"}>
-                        <span className={"card-item-box-label"}>Nome</span>
-                        <span className={"card-body-text-item"}>{unidade.responsible}</span>                        
-                    </div>
-                    <div className={"card-item-box"}>
-                        <span className={"card-item-box-label"}>E-mail</span>
-                        <span className={"card-body-text-item"}>Em construção</span>
-                    </div>
-                </div>
+                {unidade.responsible && (
+                    <>
+                        <div className={"card-section-title"}>                    
+                            <span>Informações do(a) responsável</span>
+                        </div>
+                        <div className={"card"}>
+                            <div className={"card-item-box"}>
+                                <span className={"card-item-box-label"}>Nome</span>
+                                <span className={"card-body-text-item"}>{unidade.responsible}</span>                        
+                            </div>
+                            <div className={"card-item-box"}>
+                                <span className={"card-item-box-label"}>E-mail</span>
+                                <span className={"card-body-text-item"}>Em construção</span>
+                            </div>
+                        </div>
+                    </>
+                )}
                 <div className={"card-section-title"}>
                     <span>Informações adicionais</span>
                 </div>
