@@ -24,7 +24,7 @@ function UnidadesAdministrativas(){
 
     async function loadUnidades(){
         await api.get('/cadastros/unidades/index')
-        .then((response) => setUnidades(response.data)/* console.log(response.data) */)
+        .then((response) => setUnidades(response.data))
         .catch(() => toast.error("Ocorreu um erro ao carregar as unidades!"))
     }
 
@@ -50,7 +50,7 @@ function UnidadesAdministrativas(){
 
   return (
       <>
-        <Header/>
+        <Header title={"Unidades cadastradas"} title_full={"Unidades cadastradas no sistema"}/>
         {localStorage.getItem('@fraIT/viewMode') === 'grid' ?
             (
                 <BodyGrid>
