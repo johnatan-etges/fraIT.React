@@ -16,12 +16,14 @@ import UnidadeDetails from '../pages/cadastros/unidades/unidade-details'
 import Empresas from '../pages/cadastros/empresas'
 import NewEmpresa from '../pages/cadastros/empresas/new-empresa'
 
+import PageNotFound from '../pages/PageNotFound'
+
 function routes() {  
   return (        
     <BrowserRouter>
       <Switch>      
         <Route path="/" exact component={Signin}/>
-        <Route path="/dashboard" component={Dashboard} isPrivate/>
+        <Route path="/dashboard" exact component={Dashboard} isPrivate/>
         
         <Route path="/cadastros/usuarios" exact component={UsuariosSistema} isPrivate/>
         <Route path="/cadastros/usuarios/novo" exact component={NewUser} isPrivate/>
@@ -40,6 +42,8 @@ function routes() {
 
         <Route path="/cadastros/empresas" exact component={Empresas} isPrivate/>
         <Route path="/cadastros/empresas/novo" exact component={NewEmpresa} isPrivate/>
+
+        <Route component={PageNotFound} isNotFound/>
       </Switch>
     </BrowserRouter>      
   );
