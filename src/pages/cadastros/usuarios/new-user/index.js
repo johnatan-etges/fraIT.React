@@ -1,27 +1,22 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify'
 
-import BodyForm from '../../../../components/BodyForm';
-import Header from '../../../../components/header';
-import Footer from '../../../../components/footer';
-import Input from '../../../../components/input';
-import SendFormBtn from '../../../../components/SendFormBtn';
-import GoBack from '../../../../components/go-back';
+import BodyForm from '../../../../components/BodyForm'
+import Input from '../../../../components/input'
+import SendFormBtn from '../../../../components/SendFormBtn'
+import GoBack from '../../../../components/go-back'
 
-import api from '../../../../services/api';
+import api from '../../../../services/api'
 
 function NewUser(props) {
 
-    const history = useHistory();    
-    const { user, valid }  = props.location.state.payload;    
+    const history = useHistory()
+    const { user, valid }  = props.location.state.payload 
 
     const editMode = valid ? true : false
     const buttonTitle = editMode ? "Editar usuário" : "Novo usuário"
-    const title_full = editMode ? `Editando usuário: ${user.userName}` : "Criando novo usuário"
-    const title = editMode ? `Editando ${user.userName}` : "Novo usuário"    
 
     const [data, setData] = useState({
         id: valid ? user.id : "",
@@ -124,8 +119,7 @@ function NewUser(props) {
     }
 
   return (
-    <>        
-        <Header title={title} title_full={title_full}/>
+    <>
         <BodyForm>
             <GoBack/>
             <Input
@@ -198,7 +192,6 @@ function NewUser(props) {
             />
             </div>
         </BodyForm>
-        <Footer/>
     </>
   )
 }

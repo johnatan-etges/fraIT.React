@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 
-import api from '../../../../services/api';
+import api from '../../../../services/api'
 
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
 
-import Header from '../../../../components/header';
-import BodyForm from '../../../../components/BodyForm';
-import Footer from '../../../../components/footer';
-import GoBack from '../../../../components/go-back';
-import Input from '../../../../components/input';
+import BodyForm from '../../../../components/BodyForm'
+import GoBack from '../../../../components/go-back'
+import Input from '../../../../components/input'
 import SendFormBtn from '../../../../components/SendFormBtn'
 
 function NewEntidade(props) {
@@ -18,9 +16,7 @@ function NewEntidade(props) {
     const history = useHistory()
 
     const editMode = valid ? true : false
-    const buttonTitle = editMode ? "Atualizar a entidade" : "Nova entidade"
-    const title_full = editMode ? `Editando a entidade ${entidade.name}` : "Criando nova entidade"
-    const title = editMode ? `Editando ${entidade.name}` : "Nova entidade"   
+    const buttonTitle = editMode ? "Atualizar a entidade" : "Nova entidade" 
 
     const [data, setData] = useState({
       id: valid ? entidade.id : "",
@@ -81,7 +77,6 @@ function NewEntidade(props) {
 
   return (
       <>
-        <Header title_full={title_full} title={title}/>
         <BodyForm>
             <GoBack/>
             <Input
@@ -112,7 +107,6 @@ function NewEntidade(props) {
               text={buttonTitle}                
             />
         </BodyForm>
-        <Footer/>
       </>
   );
 }

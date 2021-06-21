@@ -3,10 +3,8 @@ import { toast } from 'react-toastify'
 
 import api from '../../../services/api'
 
-import Header from '../../../components/header'
 import BodyCard from '../../../components/BodyCard'
 import BodyGrid from '../../../components/BodyGrid'
-import Footer from '../../../components/footer'
 import GridRow from '../../../components/GridRow'
 import GridColumn from '../../../components/GridColumn'
 import ContentCard from '../../../components/ContentCard'
@@ -19,19 +17,17 @@ function UnidadesAdministrativas(){
     const [unidades, setUnidades] = useState([])
 
     useEffect(() => {
+        async function loadUnidades(){
+            await api.get('/cadastros/unidades/index')
+            .then((response) => setUnidades(response.data))
+            .catch(() => toast.error("Ocorreu um erro ao carregar as unidades!"))
+        }
         loadUnidades()
-    },[])
-
-    async function loadUnidades(){
-        await api.get('/cadastros/unidades/index')
-        .then((response) => setUnidades(response.data))
-        .catch(() => toast.error("Ocorreu um erro ao carregar as unidades!"))
-    }
+    },[unidades])
 
     async function activateUnidade(unidade) {
         await api.put('/cadastros/unidades/activate',{ID: unidade.ID})
         .then(() => {
-            loadUnidades()
             toast.success("Unidade atualizada com sucesso!", {position: toast.POSITION.TOP_RIGHT})
         })
         .catch((err) => {
@@ -50,7 +46,6 @@ function UnidadesAdministrativas(){
 
   return (
       <>
-        <Header title={"Unidades cadastradas"} title_full={"Unidades cadastradas no sistema"}/>
         {localStorage.getItem('@fraIT/viewMode') === 'grid' ?
             (
                 <BodyGrid>
@@ -105,7 +100,6 @@ function UnidadesAdministrativas(){
                 </BodyCard>
             )
         }
-        <Footer/>
       </>
   )
 }

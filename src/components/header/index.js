@@ -74,6 +74,12 @@ function Header({title, title_full}) {
           open: open,
           icon: '🏛️',
           linkName: 'Unidades Administrativas',
+        },
+        {
+          target: '/cadastros/empresas',
+          open: open,
+          icon: '🏛️',
+          linkName: 'Empresas'
         }
       ]
     },

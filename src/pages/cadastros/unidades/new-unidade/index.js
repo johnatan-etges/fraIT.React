@@ -3,12 +3,10 @@ import { useHistory } from 'react-router';
 
 import { toast } from 'react-toastify'
 
-import Header from '../../../../components/header'
 import BodyForm from '../../../../components/BodyForm'
 import GoBack from '../../../../components/go-back'
 import Input from '../../../../components/input'
 import SendFormBtn from '../../../../components/SendFormBtn'
-import Footer from '../../../../components/footer'
 import Select from '../../../../components/select'
 
 import api from '../../../../services/api'
@@ -20,9 +18,7 @@ function NewUnidade(props) {
 
     const editMode = valid ? true : false
     const buttonTitle = editMode ? "Atualizar unidade" : "Nova unidade"
-    const title_full = editMode ? `Editando a unidade ${unidade.name}` : "Criando nova unidade"
-    const title = editMode ? `Editando ${unidade.name}` : "Nova unidade"
-
+    
     const [unidadeTypes, setUnidadeTypes] = useState([])
     const [entidades, setEntidades] = useState([])    
     const [unidadeData, setUnidadeData] = useState({
@@ -126,7 +122,6 @@ function NewUnidade(props) {
 
   return (
     <>
-        <Header title={title} title_full={title_full}/>
         <BodyForm>
             <GoBack/>
             <Input
@@ -198,7 +193,6 @@ function NewUnidade(props) {
                 text={buttonTitle}
             />
         </BodyForm>
-        <Footer/>
     </>
   )
 }

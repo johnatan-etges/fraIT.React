@@ -1,9 +1,7 @@
 import React from 'react';
 
-import Header from '../../../../components/header'
 import BodyCard from '../../../../components/BodyCard'
 import GoBack from '../../../../components/go-back'
-import Footer from '../../../../components/footer'
 
 import { Container } from './styles';
 
@@ -13,7 +11,6 @@ function UnidadeDetails(props) {
 
   return (
       <>
-        <Header/>
         <BodyCard>
             <Container>
                 <GoBack/>
@@ -78,8 +75,7 @@ function UnidadeDetails(props) {
                     </div>
                 </div>
             </Container>
-        </BodyCard>        
-        <Footer/>
+        </BodyCard>
       </>
   )
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Header from '../../../components/header'
 import BodyGrid from '../../../components/BodyGrid'
 import BodyCard from '../../../components/BodyCard'
 import AddNewItemGrid from '../../../components/addNewItemGrid'
@@ -8,14 +7,10 @@ import AddNewItemCard from '../../../components/addNewItemCard'
 import GridRow from '../../../components/GridRow';
 import GridColumn from '../../../components/GridColumn';
 import ContentCard from '../../../components/ContentCard';
-import Footer from '../../../components/footer';
-
-// import { Container } from './styles';
 
 function Empresas() {
   return (
-      <>
-        <Header title={"Empresas cadastradas"} title_full={"Empresas cadastradas no sistema"}/>
+      <>        
         {localStorage.getItem('@fraIT/viewMode') === 'grid' ?
             (
                 <BodyGrid>
@@ -42,8 +37,7 @@ function Empresas() {
                     </ContentCard>
                 </BodyCard>
             )
-        }
-        <Footer/>
+        }        
       </>
   )
 }

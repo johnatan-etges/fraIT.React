@@ -1,8 +1,6 @@
 import React from 'react'
 
-import Header from '../../../../components/header'
 import BodyCard from '../../../../components/BodyCard'
-import Footer from '../../../../components/footer'
 import GoBack from '../../../../components/go-back'
 import EditItem from '../../../../components/editItem'
 
@@ -14,7 +12,6 @@ function UserDetails(props) {
 
   return (
       <>
-        <Header title={`Detalhes de ${user.userName}`} title_full={`Detalhes do usuário ${user.userName}`}/>
         <BodyCard>
             <Container>
                 <GoBack/>
@@ -85,11 +82,9 @@ function UserDetails(props) {
                         }}
                         
                     />
-                </div>      
-                
+                </div>
             </Container>
         </BodyCard>
-        <Footer/>
       </>
   )
 }

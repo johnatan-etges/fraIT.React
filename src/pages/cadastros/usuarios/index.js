@@ -1,47 +1,41 @@
 
-import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
-import api from '../../../services/api';
+import api from '../../../services/api'
 
-import Header from '../../../components/header';
-import BodyCard from '../../../components/BodyCard';
-import BodyGrid from '../../../components/BodyGrid';
-import Footer from '../../../components/footer';
-import ContentCard from '../../../components/ContentCard';
-import OptionBox from '../../../components/optionsBox';
-import OptionsBoxItem from '../../../components/optionsBoxItem';
-import GridColumn from '../../../components/GridColumn';
-import GridRow from '../../../components/GridRow';
-import AddNewItemGrid from '../../../components/addNewItemGrid';
-import AddNewItemCard from '../../../components/addNewItemCard';
+import BodyCard from '../../../components/BodyCard'
+import BodyGrid from '../../../components/BodyGrid'
+import ContentCard from '../../../components/ContentCard'
+import OptionBox from '../../../components/optionsBox'
+import OptionsBoxItem from '../../../components/optionsBoxItem'
+import GridColumn from '../../../components/GridColumn'
+import GridRow from '../../../components/GridRow'
+import AddNewItemGrid from '../../../components/addNewItemGrid'
+import AddNewItemCard from '../../../components/addNewItemCard'
 import EditItem from '../../../components/editItem';
 
-function UsuariosSistema() {
-    
+function UsuariosSistema() {   
 
-    const [users, setUsers] = useState([]);    
-  
-    async function loadUsers() {
-      await api.get('/users/index')
-      .then((response) => setUsers(response.data))
-      .catch(() => toast.error("Não foi possível carregar os usuário", {position: toast.POSITION.TOP_RIGHT}))   
-    }
+    const [users, setUsers] = useState([])    
 
     useEffect(() => {
+      async function loadUsers() {
+        await api.get('/users/index')
+        .then((response) => setUsers(response.data))
+        .catch(() => toast.error("Não foi possível carregar os usuário", {position: toast.POSITION.TOP_RIGHT}))   
+      }
       loadUsers();      
-    },[]);
+    },[users]);
 
     async function activateUser(user) {       
       await api.put('/users/activation', {id: user.id})
-      .then(() => loadUsers())
+      .then(() => toast.success("Usuário atualizado com sucesso!", {position: toast.POSITION.TOP_RIGHT}))
       .catch(() => toast.error("Não foi possível atualizar o usuário", {position: toast.POSITION.TOP_RIGHT}))      
     }
 
   return (
     <>
-      <Header title="Usuários" title_full="Usuários cadastrados no sistema"/>
       {localStorage.getItem('@fraIT/viewMode') === 'grid' ? 
       (
         <BodyGrid>
@@ -101,8 +95,7 @@ function UsuariosSistema() {
             </ContentCard>
           )))}
         </BodyCard>
-      )}      
-      <Footer/>
+      )}
     </>
   )
 }

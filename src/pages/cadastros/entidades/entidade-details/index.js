@@ -5,22 +5,18 @@ import { toast } from 'react-toastify'
 
 import { Container } from './styles';
 
-import Header from '../../../../components/header'
 import BodyCard from '../../../../components/BodyCard'
-import Footer from '../../../../components/footer'
 import GoBack from '../../../../components/go-back'
 
 function EntidadeDetails(props) {
 
     const {entidade} = props.location.state.payload
-    //const [entidadeData, setEntidadeData] = useState([])
     const [unidadesData, setUnidadesData] = useState([])
 
     useEffect(() => {
         async function loadEntidadeUnidades() {
             await api.post('/cadastros/entidades/listEntidadeUnidades', null, {params: {id: entidade.id}})
-            .then((response) => {                
-                //setEntidadeData(response.data)
+            .then((response) => {
                 setUnidadesData(response.data.Unidades)
             })
             .catch(() => toast.error("Erro ao carregar informações da entidade", {position: toast.POSITION.TOP_RIGHT}))
@@ -31,7 +27,6 @@ function EntidadeDetails(props) {
 
   return (
       <>
-        <Header/>
         <BodyCard>
             <Container>
                 <GoBack/>
@@ -67,7 +62,6 @@ function EntidadeDetails(props) {
                 }
             </Container>
         </BodyCard>
-        <Footer/>
     </>
       
   )
