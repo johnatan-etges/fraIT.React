@@ -23,7 +23,7 @@ function UsuariosSistema() {
       async function loadUsers() {
         await api.get('/users/index')
         .then((response) => setUsers(response.data))
-        .catch(() => toast.error("Não foi possível carregar os usuário", {position: toast.POSITION.TOP_RIGHT}))   
+        .catch(() => toast.error("Não foi possível carregar os usuários", {position: toast.POSITION.TOP_RIGHT}))   
       }
       loadUsers();      
     },[users]);
