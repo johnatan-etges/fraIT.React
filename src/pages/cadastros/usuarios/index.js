@@ -17,20 +17,24 @@ import EditItem from '../../../components/editItem';
 
 function UsuariosSistema() {   
 
-    const [users, setUsers] = useState([])    
+    const [users, setUsers] = useState([]) 
 
-    useEffect(() => {
-      async function loadUsers() {
-        await api.get('/users/index')
-        .then((response) => setUsers(response.data))
-        .catch(() => toast.error("Não foi possível carregar os usuários", {position: toast.POSITION.TOP_RIGHT}))   
-      }
+    async function loadUsers() {
+      await api.get('/users/index')
+      .then((response) => setUsers(response.data))
+      .catch(() => toast.error("Não foi possível carregar os usuários", {position: toast.POSITION.TOP_RIGHT}))   
+    }
+
+    useEffect(() => {      
       loadUsers();      
-    },[users]);
+    },[]);
 
     async function activateUser(user) {       
       await api.put('/users/activation', {id: user.id})
-      .then(() => toast.success("Usuário atualizado com sucesso!", {position: toast.POSITION.TOP_RIGHT}))
+      .then(() => {
+        loadUsers()
+        toast.success("Usuário atualizado com sucesso!", {position: toast.POSITION.TOP_RIGHT})
+      })
       .catch(() => toast.error("Não foi possível atualizar o usuário", {position: toast.POSITION.TOP_RIGHT}))      
     }
 
@@ -43,10 +47,9 @@ function UsuariosSistema() {
           <GridRow header={true}>
             <GridColumn grid='1'>Usuário</GridColumn>
             <GridColumn grid='2.5'>E-mail</GridColumn>
-            <GridColumn grid='0.6'>Nome</GridColumn>
-            <GridColumn grid='0.5'><span role="img" aria-label="Ativar ou Desativar">↕️</span></GridColumn>
-            <GridColumn grid='0.5'>🖊</GridColumn>
-            <GridColumn grid='0'>Detalhes</GridColumn>
+            <GridColumn grid='0.6'>Nome</GridColumn>            
+            <GridColumn grid='0.5'>Ação</GridColumn>
+            <GridColumn grid='0'></GridColumn>
           </GridRow>
           {(users.map (user => 
           (
@@ -54,9 +57,9 @@ function UsuariosSistema() {
               <GridColumn grid='1'>{user.userLoginName}</GridColumn>
               <GridColumn grid='2.5'>{user.userEmail}</GridColumn>
               <GridColumn grid='0.6'>{user.userName}</GridColumn>              
-              <GridColumn grid='0.5'><button name={'Desativar'} onClick={() => activateUser(user)}>{user.userActive ? 'Desativar' : 'Ativar'}</button></GridColumn>
               <GridColumn grid='0.5'>
-                <EditItem pathname={"/cadastros/usuarios/alterar"} description={"🖊️"} payload={{user, valid: true}}/>
+                <button name={'activation'} onClick={() => activateUser(user)}>{user.userActive ? '⬇️' : '⬆️'}</button>
+                <EditItem pathname={"/cadastros/usuarios/alterar"} description={"🖊️"} payload={{user, valid: true}}/>              
               </GridColumn>
               <GridColumn grid='0'>
                 <EditItem pathname={"/cadastros/usuarios/detalhes"} description={"Detalhes"} payload={{user}} />

@@ -15,6 +15,7 @@ import NewUnidade from '../pages/cadastros/unidades/new-unidade'
 import UnidadeDetails from '../pages/cadastros/unidades/unidade-details'
 import Empresas from '../pages/cadastros/empresas'
 import NewEmpresa from '../pages/cadastros/empresas/new-empresa'
+import EmpresaDetails from '../pages/cadastros/empresas/empresa-details'
 
 import PageNotFound from '../pages/PageNotFound'
 
@@ -42,6 +43,8 @@ function routes() {
 
         <Route path="/cadastros/empresas" exact component={Empresas} isPrivate/>
         <Route path="/cadastros/empresas/novo" exact component={NewEmpresa} isPrivate/>
+        <Route path="/cadastros/empresas/alterar" exact component={NewEmpresa} isPrivate/>
+        <Route path="/cadastros/empresas/detalhes" exact component={EmpresaDetails} isPrivate/>
 
         <Route component={PageNotFound} isNotFound/>
       </Switch>

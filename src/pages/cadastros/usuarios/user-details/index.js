@@ -10,6 +10,33 @@ function UserDetails(props) {
 
     const { user } = props.location.state.payload
 
+    const permissions = [
+        {
+        label: 'Tela',
+        name: 'Listagem de usuários'
+        },
+        {
+            label: 'Tela',
+            name: 'Listagem de usuários'
+        },
+        {
+            label: 'Tela',
+            name: 'Listagem de usuários'
+        },
+        {
+            label: 'Tela',
+            name: 'Listagem de usuários'
+        },
+        {
+                label: 'Tela',
+                name: 'Listagem de usuários'
+        },
+        {
+                label: 'Tela',
+                name: 'Listagem de usuários'
+        },
+    ]
+
   return (
       <>
         <BodyCard>
@@ -50,26 +77,12 @@ function UserDetails(props) {
                         <span>Permissões do usuário no Sistema</span>
                     </div>
                     <div className={"card-box-row"}>
-                    <div className="card-item-box">
-                        <span className="card-item-box-label">Tela</span>
-                        <span className="card-body-text-item">Listagem de usuários</span>
-                    </div>
-                    <div className="card-item-box">
-                        <span className="card-item-box-label">Tela</span>
-                        <span className="card-body-text-item">Detalhes de usuário</span>
-                    </div>
-                    <div className="card-item-box">
-                        <span className="card-item-box-label">Tela</span>
-                        <span className="card-body-text-item">Novo usuário</span>
-                    </div>
-                    <div className="card-item-box">
-                        <span className="card-item-box-label">Tela</span>
-                        <span className="card-body-text-item">Editar usuário</span>
-                    </div>
-                    <div className="card-item-box">
-                        <span className="card-item-box-label">Tela</span>
-                        <span className="card-body-text-item">Dashboard</span>
-                    </div>
+                    {permissions.map(permission => (
+                        <div className="card-item-box">
+                            <span className="card-item-box-label">{permission.label}</span>
+                            <span className="card-body-text-item">{permission.name}</span>
+                        </div>
+                    ))}                   
                     </div>
                 </div>
                 <div className={"footer"}>

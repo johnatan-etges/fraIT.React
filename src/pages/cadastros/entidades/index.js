@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
-import { toast } from 'react-toastify'
 import api from '../../../services/api'
+
+import { toast } from 'react-toastify'
 
 import BodyCard from '../../../components/BodyCard'
 import BodyGrid from '../../../components/BodyGrid'
-
 import GridRow from '../../../components/GridRow'
 import GridColumn from '../../../components/GridColumn'
-
 import ContentCard from '../../../components/ContentCard'
 import AddNewItemCard from '../../../components/addNewItemCard'
 import AddNewItemGrid from '../../../components/addNewItemGrid'
@@ -17,21 +16,23 @@ import EditItem from '../../../components/editItem'
 function Entidades() {  
 
     const [entidades, setEntidades] = useState([])
+
+    async function loadEntidades() {
+        await api.get('/cadastros/entidades/index')
+        .then((response) => setEntidades(response.data))
+        .catch(() => toast.error("Não foi possível carregar os usuários!", {position: toast.POSITION.TOP_RIGHT}))
+    }
     
-    useEffect(() => {
-        async function loadEntidades() {
-            await api.get('/cadastros/entidades/index')
-            .then((response) => setEntidades(response.data))
-            .catch(() => toast.error("Não foi possível carregar os usuários!", {position: toast.POSITION.TOP_RIGHT}))
-        }
+    useEffect(() => {        
         loadEntidades();
-    },[entidades])
+    },[])
 
     async function activateEntidade(entity) {
         await api.put("/cadastros/entidades/activate",{
           id: entity.id
         })
         .then(() => {
+            loadEntidades()
             toast.success("Entidade atualizada com sucesso!", {position: toast.POSITION.TOP_RIGHT})
         })
         .catch((err) => {

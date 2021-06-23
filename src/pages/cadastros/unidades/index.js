@@ -16,18 +16,20 @@ function UnidadesAdministrativas(){
 
     const [unidades, setUnidades] = useState([])
 
-    useEffect(() => {
-        async function loadUnidades(){
-            await api.get('/cadastros/unidades/index')
-            .then((response) => setUnidades(response.data))
-            .catch(() => toast.error("Ocorreu um erro ao carregar as unidades!"))
-        }
+    async function loadUnidades(){
+        await api.get('/cadastros/unidades/index')
+        .then((response) => setUnidades(response.data))
+        .catch(() => toast.error("Não foi possível carregar as unidades!"))
+    }
+
+    useEffect(() => {        
         loadUnidades()
-    },[unidades])
+    },[])
 
     async function activateUnidade(unidade) {
         await api.put('/cadastros/unidades/activate',{ID: unidade.ID})
         .then(() => {
+            loadUnidades()
             toast.success("Unidade atualizada com sucesso!", {position: toast.POSITION.TOP_RIGHT})
         })
         .catch((err) => {
