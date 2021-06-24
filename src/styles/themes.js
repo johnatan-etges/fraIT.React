@@ -13,7 +13,7 @@ export const primary = theme('mode', {
 //cards, page, menuitems and focused items background
 export const secundary = theme('mode', {
     /* light: '#f1f1f1', */
-    light: '#d5d5d5',
+    light: '#28587B',
     dark: '#363740',
 });
 
