@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify'
 
 import api from '../../../services/api'
-
-import { toast } from 'react-toastify'
+import fecthData from '../../../utils/fetchData'
 
 import BodyGrid from '../../../components/BodyGrid'
 import BodyCard from '../../../components/BodyCard'
@@ -13,26 +13,20 @@ import GridColumn from '../../../components/GridColumn'
 import ContentCard from '../../../components/ContentCard'
 import EditItem from '../../../components/editItem'
 
+
 function Empresas() {
 
     const [empresas, setEmpresas] = useState([])
 
-    async function loadEmpresas() {
-        await api.get("/cadastros/empresas/index")
-        .then((response) => {setEmpresas(response.data)})
-        .catch(() => toast.error("Não foi possível carregar as empresas."))
-    }
-
     useEffect(() => {        
-        loadEmpresas()
+        fecthData('/cadastros/empresas/index')
+            .then((response => setEmpresas(response.data)))
+            .catch((err) => toast.error("Não foi possível carregar as empresas", {position: toast.POSITION_TOP_RIGHT}))
     },[])
 
     async function activateEmpresa(empresa) {
         await api.put("/cadastros/empresas/activate", { ID: empresa.ID})
-        .then((response) => {
-            loadEmpresas()            
-            toast.success("Empresa atualizada com sucesso!", {position: toast.POSITION_TOP_RIGHT})
-        })
+        .then(response => toast.success("Empresa atualizada com sucesso!", {position: toast.POSITION_TOP_RIGHT}))
         .catch((err) => {
             switch(err) {
                 case 400:

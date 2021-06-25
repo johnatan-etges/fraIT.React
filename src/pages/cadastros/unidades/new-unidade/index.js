@@ -11,63 +11,32 @@ import Select from '../../../../components/select'
 
 import api from '../../../../services/api'
 
+import prepareDataForSelect from '../../../../utils/prepareDataForSelect'
+import fecthData from '../../../../utils/fetchData'
+
+
 function NewUnidade(props) {
 
-    const { unidade, valid } = props.location.state.payload
     const history = useHistory()
-
-    const editMode = valid ? true : false
-    const buttonTitle = editMode ? "Atualizar unidade" : "Nova unidade"
     
+    const { unidade, valid } = props.location.state.payload    
+    const buttonTitle = valid ? "Atualizar unidade" : "Nova unidade"
+    const [unidadeData, setUnidadeData] = useState(valid ? unidade : {})    
     const [unidadeTypes, setUnidadeTypes] = useState([])
-    const [entidades, setEntidades] = useState([])    
-    const [unidadeData, setUnidadeData] = useState({
-        ID: valid ? unidade.ID : "",
-        name: valid ? unidade.name : "",
-        address: valid ? unidade.address : "",
-        latitude: valid ? unidade.latitude : "",
-        longitude: valid ? unidade.longitude : "",
-        phoneNumber: valid ? unidade.phoneNumber : "",
-        ipAddress: valid ? unidade.ipAddress : "",
-        responsible: valid ? unidade.responsible : "",
-        UnidadeTypeID: valid ? unidade.UnidadeTypeID : "",
-        UnidadeTypeName: valid ? unidade.UnidadeType.name : "",
-        EntidadeID: valid ? unidade.EntidadeID : "",
-        EntidadeName: valid ? unidade.Entidade.name : "",        
-    })
-
-    useEffect(() => {
-        async function loadAuxData() {
-            await api.get('/cadastros/entidades/indexActive')
-            .then((response) => setEntidades(prepareDataForSelect(response.data)))
-            .catch((err) => toast.error("Não foi possível carregar as entidades", {position: toast.POSITION.TOP_RIGHT}))
+    const [entidades, setEntidades] = useState([])        
     
-            await api.get('/cadastros/unidades/unidadeTypes/index')
-            .then((response) => setUnidadeTypes(prepareDataForSelect(response.data)))
-            .catch((err) => toast.error("Não foi possível carregar os tipos de unidades", {position: toast.POSITION.TOP_RIGHT}))
-        }
-        loadAuxData()
+    useEffect(() => {
+        fecthData('/cadastros/entidades/indexActive')
+        .then(response => setEntidades(prepareDataForSelect(response.data)))
     },[])
 
-    
-    
-    function prepareDataForSelect(fetchedSelectData) {
-        let dataToSet = fetchedSelectData.map(individualData => ({value: individualData.id || individualData.ID, label: individualData.name}))
-        return dataToSet
-    }
-
+    useEffect(() => {
+        fecthData('/cadastros/unidades/unidadeTypes/index')
+        .then(response => setUnidadeTypes(prepareDataForSelect(response.data)))
+    }, [])
+     
     async function createUnidade() {
-        await api.post('/cadastros/unidades/store', {
-            name: unidadeData.name,
-            address: unidadeData.address,
-            latitude: unidadeData.latitude,
-            longitude: unidadeData.longitude,
-            phoneNumber: unidadeData.phoneNumber,
-            ipAddress: unidadeData.ipAddress,
-            responsible: unidadeData.responsible,
-            UnidadeTypeID: unidadeData.UnidadeTypeID,
-            EntidadeID: unidadeData.EntidadeID,
-        })
+        await api.post('/cadastros/unidades/store', {unidade: unidadeData})
         .then(() => {
             toast.success("Unidade criada com sucesso!", {position: toast.POSITION.TOP_RIGHT})
             history.push('/cadastros/unidades')
@@ -88,18 +57,7 @@ function NewUnidade(props) {
 
     async function updateUnidade() {
         
-        await api.put('/cadastros/unidades/update', {
-            ID: unidadeData.ID,
-            name: unidadeData.name,
-            address: unidadeData.address,
-            latitude: unidadeData.latitude,
-            longitude: unidadeData.longitude,
-            phoneNumber: unidadeData.phoneNumber,
-            ipAddress: unidadeData.ipAddress,
-            responsible: unidadeData.responsible,
-            UnidadeTypeID: unidadeData.UnidadeTypeID,
-            EntidadeID: unidadeData.EntidadeID,
-        })
+        await api.put('/cadastros/unidades/update', {unidade: unidadeData})
         .then(() => {
             toast.success("Unidade atualizada com sucesso!", {position: toast.POSITION.TOP_RIGHT})
             history.push('/cadastros/unidades')
@@ -189,7 +147,7 @@ function NewUnidade(props) {
                 onBlur={(value) => setUnidadeData({...unidadeData, longitude: value})}
             />
             <SendFormBtn
-                onClick={editMode ? () => updateUnidade() : () => createUnidade()}
+                onClick={valid ? () => updateUnidade() : () => createUnidade()}
                 text={buttonTitle}
             />
         </BodyForm>
